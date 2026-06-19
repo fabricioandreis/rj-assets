@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Novo App RJ - Mockup Interativo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="stage">
+      <aside class="prototype-notes" aria-label="Notas do protótipo">
+        <img src="./assets/logo-g.png" alt="Recreio da Juventude" />
+        <p class="eyebrow">Prova de conceito</p>
+        <h1>Novo App do Associado RJ</h1>
+        <p>
+          Mockup navegável baseado no documento de design e no inventário do APK
+          sandbox legado. Não há backend: todos os dados, reservas, pagamentos e
+          comprovantes são simulados no navegador.
+        </p>
+        <div class="note-card">
+          <strong>Como testar</strong>
+          <span>Use qualquer CPF/matrícula/e-mail e senha para entrar.</span>
+        </div>
+        <div class="note-card muted">
+          <strong>Fluxos clicáveis</strong>
+          <span>Reserva, pagamento, evento, carteirinha, serviço, convênio, academia e atendimento.</span>
+        </div>
+      </aside>
+
+      <section class="phone-shell" aria-label="Aplicativo mobile">
+        <div class="device-bar">
+          <span>9:41</span>
+          <span class="signal">RJ 5G</span>
+        </div>
+        <div id="app" class="app-root"></div>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>

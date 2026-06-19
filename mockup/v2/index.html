@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App RJ Associado — Protótipo Interativo</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <main class="stage">
+      <aside class="sidebar" aria-label="Notas do protótipo">
+        <img class="sidebar-logo" src="./assets/logo-g.png" alt="Recreio da Juventude" />
+        <p class="eyebrow">Prova de conceito v2</p>
+        <h1>Novo App do Associado</h1>
+        <p>Mockup navegável baseado no documento de design e no inventário do APK sandbox legado. Sem back-end — tudo simulado no navegador.</p>
+
+        <div class="note-card">
+          <strong>Login</strong>
+          <span>Use qualquer CPF, matrícula ou e-mail. A senha já está preenchida.</span>
+        </div>
+        <div class="note-card muted">
+          <strong>Fluxos disponíveis</strong>
+          <ul>
+            <li>Login e recuperação de senha</li>
+            <li>Home com atalhos configuráveis</li>
+            <li>Reservas — 5 passos com stepper</li>
+            <li>Pagamentos — boleto e cartão</li>
+            <li>Eventos e compra de ingressos</li>
+            <li>Carteirinha com QR e código de acesso</li>
+            <li>Serviços, lista de espera e rematrícula</li>
+            <li>Academia e avaliação física</li>
+            <li>Convênio interclubes</li>
+            <li>Mapa do clube</li>
+            <li>Minha conta e dependentes</li>
+            <li>Notificações com leitura</li>
+            <li>Atendimento e FAQ</li>
+            <li>Visitantes e códigos de acesso</li>
+          </ul>
+        </div>
+      </aside>
+
+      <section class="phone-shell" aria-label="Aplicativo mobile">
+        <div class="status-bar">
+          <span class="status-time">9:41</span>
+          <div class="status-icons">
+            <svg width="16" height="12" viewBox="0 0 16 12" fill="currentColor">
+              <rect x="0" y="3" width="3" height="9" rx="1"/>
+              <rect x="4.5" y="1.5" width="3" height="10.5" rx="1"/>
+              <rect x="9" y="0" width="3" height="12" rx="1"/>
+              <rect x="13.5" y="0" width="2.5" height="12" rx="1" opacity=".3"/>
+            </svg>
+            <svg width="16" height="12" viewBox="0 0 18 14" fill="currentColor">
+              <path d="M9 0C5.2 0 1.8 1.6 0 4.1l2 2C3.4 4.1 6 2.7 9 2.7s5.6 1.4 7 3.4l2-2C16.2 1.6 12.8 0 9 0z"/>
+              <path d="M9 5.3c-2.2 0-4.1 1-5.4 2.5l2 2C6.5 8.7 7.7 8 9 8s2.5.7 3.4 1.8l2-2C13.1 6.3 11.2 5.3 9 5.3z"/>
+              <circle cx="9" cy="12" r="2"/>
+            </svg>
+            <div class="battery">
+              <div class="battery-fill" style="width:76%"></div>
+            </div>
+          </div>
+        </div>
+        <div id="app" class="app-root"></div>
+      </section>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
