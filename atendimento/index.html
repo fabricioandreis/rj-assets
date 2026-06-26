@@ -229,6 +229,27 @@
   .uc-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
   .uc-body-inner{padding:0 22px 22px; border-top:1px solid var(--line); margin-top:0;}
   .uc-body-inner p{font-size:.95rem; margin:16px 0 0; color:var(--ink2);}
+  .uc-summary{padding-bottom:18px;}
+  .uc-full{
+    border-top:1px dashed var(--line);
+    padding-top:18px;
+    display:grid;
+    gap:12px;
+  }
+  .uc-full-title{
+    font-family:var(--serif);
+    font-weight:800;
+    color:var(--ink);
+    font-size:.98rem;
+    line-height:1.28;
+  }
+  .uc-full-lines{display:grid; gap:9px;}
+  .uc-full-line{
+    font-size:.92rem;
+    line-height:1.52;
+    color:var(--ink2);
+  }
+  .uc-full-line strong{color:var(--ink); font-family:var(--serif); font-weight:700;}
 
   /* ===== Prioridades ===== */
   .prioridades{background:var(--soft);}
@@ -754,26 +775,435 @@ const USE_CASES = [
   {id:"31",pr:"P2",cl:"soc",t:"Benefícios, convênios, Clube na Mala e cartas",p:"Sócio que quer carta, convênio ou Clube na Mala",d:"Pedidos pequenos, mas com prazo claro (viagem, fim de semana) e alto risco de frustração se atrasarem. Resolução: validar adimplência/categoria, coletar destino/período/pessoas, gerar a carta ou orientação padronizada, registrar o envio e arquivar o comprovante."}
 ];
 
+const UC_FULL_DETAILS = {
+  "10": {
+    "title": "UC-10 - Matricula, rematricula e lista de espera em esportes",
+    "lines": [
+      "Como um socio, atleta ou responsavel por dependente",
+      "Quando quero matricular, trocar turma, entrar em lista de espera ou confirmar vaga em modalidade esportiva ou atividade regular como natacao, hidroginastica, yoga, pilates, RPM, bike, xadrez, the trip ou escolinhas",
+      "Eu quero fazer a solicitacao pelo celular e acompanhar minha posicao/status",
+      "Para que eu nao precise falar com secretaria, professor e coordenador separadamente",
+      "Critica: com 4.202 inscricoes esportivas, esta deve ser uma fila central. Lista de espera sem visibilidade gera ansiedade e contatos repetidos.",
+      "Resolucao ponta a ponta: validar idade/categoria/pre-requisitos, consultar vagas, registrar interesse, confirmar matricula, atualizar cobranca, notificar coordenador e responsavel.",
+      "Areas: Esportes, secretaria, financeiro e coordenador da modalidade."
+    ]
+  },
+  "11": {
+    "title": "UC-11 - Comunicacao e suporte a atletas de rendimento, master e paralimpico",
+    "lines": [
+      "Como atleta ou familiar de atleta",
+      "Quando preciso tratar competicao, documento, convocacao, viagem, autorizacao, uniforme, bolsa ou suporte multidisciplinar",
+      "Eu quero um canal rastreavel que envolva esporte, financeiro e administracao sem perder prazos",
+      "Para que a rotina competitiva seja organizada e auditavel",
+      "Critica: demandas de rendimento tem prazo e reputacao envolvidos. Um grupo informal resolve rapido, mas nao gera historico nem governanca.",
+      "Resolucao ponta a ponta: coletar solicitacao/documentos, classificar tipo de apoio, aprovar responsavel, registrar decisao, entregar documento/recurso e manter historico por atleta.",
+      "Areas: Esportes, financeiro, DHO quando envolver colaboradores atletas, comunicacao e diretoria quando houver exposicao institucional."
+    ]
+  },
+  "12": {
+    "title": "UC-12 - Manutencao emergencial reportada pelo associado",
+    "lines": [
+      "Como um associado usando a estrutura do clube",
+      "Quando encontro vazamento, descarga quebrada, chuveiro que nao fecha, risco eletrico, vidro quebrado, piso escorregadio ou equipamento perigoso",
+      "Eu quero abrir chamado em segundos com foto, sede e local",
+      "Para que a equipe de manutencao atue com prioridade e o clube me informe quando o problema for isolado e resolvido",
+      "Critica: esse caso nao pode seguir SLA administrativo comum. Emergencia operacional precisa separar \"conter risco\" de \"corrigir definitivo\".",
+      "Resolucao ponta a ponta: capturar foto/local, classificar risco, notificar manutencao/seguranca, registrar contencao, criar OS no CMMS, atualizar socio e encerrar com evidencias.",
+      "SLA sugerido: triagem em ate 15 minutos em horario de operacao; contencao conforme criticidade."
+    ]
+  },
+  "13": {
+    "title": "UC-13 - Manutencao nao emergencial e melhorias de infraestrutura",
+    "lines": [
+      "Como um socio frequente",
+      "Quando percebo problema recorrente em banheiro, vestiario, chuveiro, agua quente/fria, piscina, quadra, academia, sauna, parquinho, pista, maquina de gelo, iluminacao, Wi-Fi, armario ou mobiliario",
+      "Eu quero registrar a demanda e acompanhar se virou manutencao, melhoria planejada ou investimento futuro",
+      "Para que minha reclamacao nao desapareca como comentario isolado",
+      "Critica: nem toda demanda vira OS imediata, mas toda demanda deve virar dado. Esse e o elo entre atendimento e priorizacao patrimonial.",
+      "Resolucao ponta a ponta: registrar local/categoria, agrupar reincidencias, criar OS ou backlog de melhoria, informar previsao ou justificativa, alimentar dashboard por sede.",
+      "Areas: Patrimonio, manutencao, TI quando infraestrutura digital, diretoria para recorrencias de investimento."
+    ]
+  },
+  "14": {
+    "title": "UC-14 - Problema em academia, Recreio Life, SPA, beleza/saude ou bem-estar",
+    "lines": [
+      "Como usuario de academia, Recreio Life, SPA ou servico de bem-estar",
+      "Quando tenho problema com equipamento, agenda, profissional, plano, lotacao, avaliacao fisica, exame/atestado, ambiente ou servico de saude e bem-estar",
+      "Eu quero abrir chamado ou pedir ajuste pelo celular",
+      "Para que minha rotina de saude nao dependa de procurar um responsavel presencialmente",
+      "Critica: academias tiveram 3.886 inscritos em 2025. O volume justifica fila propria ou subcategoria com SLA menor para problemas de equipamento/seguranca.",
+      "Resolucao ponta a ponta: identificar unidade/servico, diferenciar manutencao de atendimento comercial, acionar responsavel, registrar solucao e comunicar usuario.",
+      "Areas: Recreio Life/academia, manutencao, financeiro, secretaria e terceiros/prestadores."
+    ]
+  },
+  "15": {
+    "title": "UC-15 - Reclame aqui interno: qualidade, conduta, disciplina e convivencia",
+    "lines": [
+      "Como socio, dependente, visitante ou colaborador",
+      "Quando presencio mau atendimento, conduta inadequada, conflito, descumprimento de regra, uso indevido de espaco, problema disciplinar, sugestao de melhoria, elogio ou feedback sobre qualidade da experiencia",
+      "Eu quero registrar com privacidade e receber retorno formal",
+      "Para que o clube trate a situacao com seriedade, sem exposicao publica desnecessaria",
+      "Critica: esse fluxo precisa separar feedback comum de caso sensivel. Reclamacao disciplinar exige confidencialidade, perfis de acesso restritos e rito claro; sugestoes e elogios precisam virar dado de melhoria, nao sumir em caixa generica.",
+      "Resolucao ponta a ponta: receber relato/anexos, classificar sensibilidade, proteger dados quando necessario, encaminhar a DHO/disciplina/gestao ou area operacional, registrar decisao ou encaminhamento e retornar ao reclamante dentro do limite permitido.",
+      "Risco: notas internas jamais podem vazar ao associado ou acusado."
+    ]
+  },
+  "16": {
+    "title": "UC-16 - Atendimento de criancas, educacao, Escola de Artes, Recreio LAB e HighLab",
+    "lines": [
+      "Como pai, mae ou responsavel",
+      "Quando preciso tratar inscricao, horario, professor, cobranca, autorizacao, material, comunicacao ou ocorrencia envolvendo crianca",
+      "Eu quero um canal unico com historico por dependente",
+      "Para que assuntos sensiveis nao fiquem espalhados entre secretaria, professor, WhatsApp e financeiro",
+      "Critica: demandas infantis combinam urgencia emocional, LGPD, autorizacoes e multiplas areas. A unidade do historico e essencial.",
+      "Resolucao ponta a ponta: identificar dependente, validar responsavel, classificar assunto, envolver area pedagogica/arte/esporte/financeiro, registrar retorno e anexos.",
+      "Areas: Educacao, Escola de Artes, secretaria, financeiro, DHO quando houver ocorrencia."
+    ]
+  },
+  "17": {
+    "title": "UC-17 - Duvidas de regras, horarios, normas de uso e base de conhecimento",
+    "lines": [
+      "Como socio ou visitante autorizado",
+      "Quando tenho duvida sobre horarios, estatuto, normas, atividades sazonais, piscina, sauna, quadra, gelo, estacionamento, convidados, menores, pets/animais, trajes, reservas, pagamentos, reabertura, pandemia, funcionamento de sedes ou regras de evento",
+      "Eu quero resposta imediata e oficial pelo canal que estou usando",
+      "Para que eu nao dependa de boatos em grupos ou de ligar para a secretaria",
+      "Critica: grande parte dessas demandas deve ser resolvida antes de virar ticket. Mas o bot/base precisa sempre oferecer \"abrir chamado\" quando a resposta nao resolver.",
+      "Resolucao ponta a ponta: sugerir artigo oficial, confirmar se resolveu, abrir ticket se necessario, medir perguntas sem resposta para atualizar a base.",
+      "Automacao: alta."
+    ]
+  },
+  "18": {
+    "title": "UC-18 - Comunicacao recebida por Instagram, comentarios publicos e redes sociais",
+    "lines": [
+      "Como associado que usa redes sociais",
+      "Quando faco uma pergunta, reclamo ou peco ajuda por Instagram, Facebook ou comentario publico",
+      "Eu quero ser levado para um atendimento privado com protocolo",
+      "Para que minha demanda seja resolvida sem exposicao publica e sem perder o contexto da mensagem original",
+      "Critica: redes sociais sao canal de reputacao, nao backoffice. O atendimento deve capturar, privatizar e protocolar.",
+      "Resolucao ponta a ponta: responder publicamente com orientacao segura quando cabivel, mover para DM/WhatsApp, criar ticket com link da postagem, encaminhar area e retornar ao associado.",
+      "Areas: Comunicacao, atendimento, area responsavel e diretoria em crises."
+    ]
+  },
+  "19": {
+    "title": "UC-19 - TI para associados: app, login, reservas, Wi-Fi e pagamentos digitais",
+    "lines": [
+      "Como socio ou dependente",
+      "Quando o app nao abre, login falha, pagamento digital nao funciona, reserva nao aparece ou Wi-Fi esta ruim em uma sede",
+      "Eu quero reportar pelo celular e receber diagnostico simples",
+      "Para que eu consiga usar os servicos digitais do clube sem depender de atendimento presencial",
+      "Critica: se o canal primario e mobile, falhas digitais precisam de suporte proprio. Caso contrario, o proprio sistema de atendimento vira ponto de frustracao.",
+      "Resolucao ponta a ponta: coletar aparelho/print/sistema, validar cadastro, acionar fornecedor ou TI, informar workaround, registrar incidente recorrente e encerrar com confirmacao.",
+      "Areas: TI, fornecedor do app, secretaria, financeiro quando envolver pagamento."
+    ]
+  },
+  "20": {
+    "title": "UC-20 - Solicitacoes internas de colaboradores e prestadores",
+    "lines": [
+      "Como colaborador, professor, terceirizado ou prestador de servico",
+      "Quando preciso reportar problema de manutencao, TI, material, acesso, uniforme, ponto, RH ou apoio operacional",
+      "Eu quero abrir chamado interno pelo celular sem misturar com demandas de associados",
+      "Para que o clube resolva necessidades operacionais e preserve rastreabilidade",
+      "Critica: o sistema deve separar portal externo de associados e portal interno de operacao. Misturar filas cria vazamento de informacao e distorce SLAs.",
+      "Resolucao ponta a ponta: identificar perfil interno, classificar area, rotear para DHO/TI/patrimonio/almoxarifado, registrar aprovacao quando houver custo e encerrar com evidencias.",
+      "Areas: DHO, TI, patrimonio, financeiro, gestor do contrato. Curriculos, fornecedores, patrocinios e parcerias de pessoas externas seguem o UC-28."
+    ]
+  },
+  "21": {
+    "title": "UC-21 - Incidente operacional durante evento ou pico de movimento",
+    "lines": [
+      "Como gestor de evento, portaria, seguranca ou associado afetado",
+      "Quando ha superlotacao, fila, queda de sistema, problema de acesso, falta de energia, conflito, chuva em evento externo ou risco de seguranca",
+      "Eu quero acionar um fluxo de incidente com responsaveis e comunicacao rapida",
+      "Para que o clube contenha o problema e mantenha o publico informado",
+      "Critica: eventos geram demandas simultaneas e publicas. Tratar cada mensagem como ticket isolado perde a visao de incidente.",
+      "Resolucao ponta a ponta: abrir incidente-mae, vincular tickets de associados, acionar responsaveis, enviar comunicados por canal oficial, registrar pos-mortem e acoes preventivas.",
+      "Areas: Operacoes, seguranca, comunicacao, portaria, manutencao, social/esportes conforme evento."
+    ]
+  },
+  "22": {
+    "title": "UC-22 - Ouvidoria executiva e escalonamento de SLA",
+    "lines": [
+      "Como associado com demanda nao resolvida ou gestor do clube",
+      "Quando um chamado estoura prazo, fica sem responsavel ou tem impacto reputacional/financeiro relevante",
+      "Eu quero escalonamento automatico com historico completo",
+      "Para que a gestao intervenha com contexto e sem depender de relato informal",
+      "Critica: sem escalonamento, SLA vira numero decorativo. A diretoria precisa ver poucos casos, mas os casos certos.",
+      "Resolucao ponta a ponta: detectar atraso/criticidade, notificar gestor, registrar decisao, replanejar prazo quando necessario, comunicar associado e fechar causa raiz.",
+      "Areas: gestor da fila, VP administrativa/financeira, area responsavel e atendimento."
+    ]
+  },
+  "23": {
+    "title": "UC-23 - Atendimento assistido presencial e telefonico",
+    "lines": [
+      "Como associado senior, associado com dificuldade digital ou socio em negociacao sensivel",
+      "Quando eu procuro atendimento presencial ou ligo para o clube para resolver financeiro, cadastro, aplicativo, acesso ou orientacao geral",
+      "Eu quero que o atendente abra ou atualize um protocolo em meu nome durante o atendimento",
+      "Para que eu receba o mesmo acompanhamento, prazo e historico de quem abriu pelo canal digital",
+      "Critica: os relatorios mostram que presencial e telefone continuam importantes, principalmente para idosos, negociacoes financeiras e suporte ao aplicativo. O objetivo nao e forcar todo associado a usar digital; e garantir que qualquer canal alimente a mesma fila.",
+      "Resolucao ponta a ponta: identificar associado, registrar resumo da conversa, anexar documentos quando houver, classificar area, entregar numero de protocolo verbalmente e por SMS/WhatsApp/e-mail, acompanhar retorno e encerrar com confirmacao.",
+      "Areas: Atendimento, secretaria, financeiro, TI/app e gestao quando envolver negociacao ou excecao."
+    ]
+  },
+  "24": {
+    "title": "UC-24 - Deduplicacao e migracao de canais legados para protocolo unico",
+    "lines": [
+      "Como atendente ou gestora de atendimento",
+      "Quando o mesmo associado aciona SAC, Jivo, WhatsApp individual, e-mail, telefone e presencial pela mesma demanda",
+      "Eu quero localizar, vincular ou mesclar interacoes em um unico protocolo",
+      "Para que o clube reduza retrabalho, evite respostas divergentes e enxergue o tempo real de resolucao",
+      "Critica: o fluxo recorrente SAC -> Jivo -> WhatsApp -> telefone -> presencial mostra que a duplicidade e uma das maiores fontes de custo operacional e percepcao de demora. Sem deduplicacao, um canal unico novo nao resolve o historico espalhado.",
+      "Resolucao ponta a ponta: detectar possivel duplicidade por associado, telefone, e-mail, matricula, assunto e periodo; sugerir ticket existente; preservar canais de origem; manter uma linha do tempo unica; responder no canal preferido; fechar duplicatas com motivo auditavel.",
+      "Areas: Atendimento/SAA, TI/integracoes, comunicacao e todos os setores que ainda recebem demanda direta."
+    ]
+  },
+  "25": {
+    "title": "UC-25 - Encaminhamento para areas com SLA, cobranca automatica e resposta padronizada",
+    "lines": [
+      "Como atendente, gestor de area ou gestora do SAA",
+      "Quando uma solicitacao depende de tesouraria, cobranca, secretaria, esportes, academia, manutencao, locacoes, social, institucional ou comercial",
+      "Eu quero encaminhar a tarefa com prazo, responsavel, modelo de resposta e cobranca automatica",
+      "Para que o atendimento pare de depender de acompanhamentos manuais e respostas genericas",
+      "Critica: os relatorios apontam dependencia das areas de apoio, ausencia de prazos padronizados, necessidade constante de cobranca manual e baixa prioridade do SAC nas areas. Esse caso de uso transforma \"encaminhar e cobrar\" em fluxo operacional mensuravel.",
+      "Resolucao ponta a ponta: selecionar area e responsavel, aplicar SLA por tipo de demanda, notificar area, permitir comentario interno, cobrar automaticamente antes/depois do vencimento, aprovar resposta quando necessario, responder ao associado e medir tempo por etapa.",
+      "Areas: Atendimento/SAA, todos os departamentos resolvedores e diretoria quando houver atraso recorrente."
+    ]
+  },
+  "26": {
+    "title": "UC-26 - Movimentacao societaria e ciclo de vida do titulo",
+    "lines": [
+      "Como socio titular, dependente que completa 18 anos, familiar ou secretaria societaria",
+      "Quando preciso tratar abertura de titulo ja aprovada, renovacao de socio ausente ou estudante, transferencia, venda/compra de joia entre terceiros, dissolucao, unificacao, troca de titularidade, inclusao por uniao estavel, readmissao, inativacao, desligamento por falecimento ou mudanca de categoria",
+      "Eu quero iniciar o processo com checklist, documentos, taxas, aprovacoes e status claro",
+      "Para que a movimentacao societaria nao fique espalhada entre e-mails, WhatsApps, financeiro, secretaria e controle manual",
+      "Critica: os relatorios mostram movimentacao de titulos como frente propria. Ela se relaciona com cadastro e financeiro, mas nao e apenas atualizacao cadastral: envolve rito, documentos, elegibilidade, efeitos em acesso, cobranca, dependentes e comunicacoes formais.",
+      "Resolucao ponta a ponta: identificar tipo de movimentacao, validar solicitante e documentos, calcular impacto financeiro, coletar aprovacao quando exigida, atualizar ERP/cadastro/acesso, enviar comunicacao padronizada e arquivar comprovantes.",
+      "Areas: Secretaria, financeiro/tesouraria, cobranca, portaria/acessos e gestao quando houver excecao."
+    ]
+  },
+  "27": {
+    "title": "UC-27 - Prospeccao, admissao e aquisicao de titulo por novos associados",
+    "lines": [
+      "Como interessado em se associar, familia candidata ou socio individual que quer ampliar para plano familiar",
+      "Quando eu peco valores, joia, titulo, mensalidade, beneficios, visita para conhecer o clube, inclusao de conjuge/familia ou orientacao para comprar um titulo",
+      "Eu quero receber uma resposta comercial clara, com simulacao, documentos, regras, prazo e proximo passo",
+      "Para que eu consiga decidir e iniciar a admissao sem depender de contatos informais ou respostas soltas por e-mail",
+      "Critica: a base historica mostra alto volume de termos como associar, joia, titulo familiar, valores e plano familiar. Isso nao deve ficar misturado com cadastro de socio ativo nem com movimentacao societaria ja formalizada.",
+      "Resolucao ponta a ponta: capturar lead, identificar perfil familiar/individual, informar beneficios e custos, agendar visita quando necessario, coletar documentos iniciais, encaminhar para comercial/secretaria e converter para UC-26 quando virar processo formal de titulo.",
+      "Areas: Atendimento/SAA, comercial/novos negocios, secretaria societaria e financeiro."
+    ]
+  },
+  "28": {
+    "title": "UC-28 - Trabalhe conosco, fornecedores, parcerias e patrocinios",
+    "lines": [
+      "Como candidato a vaga, fornecedor, marca parceira ou interessado comercial externo",
+      "Quando envio curriculo, proposta de servico, oferta de fornecedor, pedido de parceria, patrocinio ou contato com marketing/comercial",
+      "Eu quero que minha mensagem seja direcionada para a area correta e receba confirmacao de recebimento",
+      "Para que oportunidades externas nao fiquem perdidas no SAC de associados",
+      "Critica: curriculos e propostas aparecem na base historica. Eles exigem tratamento LGPD, prazo e area responsavel diferentes do atendimento ao socio. Misturar com demandas de associado distorce SLA e cria risco de dados pessoais sem politica de retencao.",
+      "Resolucao ponta a ponta: classificar como vaga, fornecedor, patrocinio, parceria ou proposta comercial; coletar anexos com consentimento; enviar protocolo ou resposta automatica; rotear para DHO, suprimentos, marketing, comercial ou diretoria; encerrar com status padronizado.",
+      "Areas: DHO, suprimentos, marketing/comunicacao, comercial/novos negocios e diretoria quando houver proposta estrategica."
+    ]
+  },
+  "29": {
+    "title": "UC-29 - Servicos de conveniencia, consumo, biblioteca e achados e perdidos",
+    "lines": [
+      "Como associado, dependente ou visitante autorizado usando o clube no dia a dia",
+      "Quando preciso falar sobre restaurante, bar, lancheria, cantina, cardapio, biblioteca, livros, coworking, lojas, aluguel/emprestimo de materiais, objeto perdido ou objeto encontrado",
+      "Eu quero orientacao rapida ou encaminhamento para o responsavel do servico",
+      "Para que uma demanda simples de conveniencia nao vire reclamacao publica ou procura presencial sem dono",
+      "Critica: a experiencia do clube nao se limita a esporte, financeiro e manutencao. Gastronomia, biblioteca, achados e perdidos e servicos de apoio aparecem na base historica e precisam ter fila ou responsavel claro, mesmo quando operados por concessionario.",
+      "Resolucao ponta a ponta: identificar servico/local, consultar informacao oficial quando for duvida simples, registrar reclamacao ou solicitacao, rotear ao responsavel interno/concessionario, anexar foto quando houver objeto ou problema, confirmar retorno ao associado.",
+      "Areas: Operacoes, atendimento, concessionarios, biblioteca/cultural, seguranca e administracao da sede."
+    ]
+  },
+  "30": {
+    "title": "UC-30 - Mobilidade, estacionamento e circulacao interna",
+    "lines": [
+      "Como associado, visitante, colaborador ou gestor de operacao",
+      "Quando tenho problema ou sugestao sobre estacionamento, veiculos, motos, bicicletas, onibus, motorhome, carregador eletrico, velocidade interna, calcamento, fluxo de entrada/saida ou seguranca de circulacao",
+      "Eu quero registrar local, risco, horario e evidencia pelo celular",
+      "Para que o clube trate mobilidade como operacao e seguranca, nao como comentario isolado",
+      "Critica: estacionamento e circulacao aparecem em reclamacoes, sugestoes e riscos de seguranca. Parte vira manutencao, parte vira regra operacional e parte vira investimento. O sistema precisa separar esses encaminhamentos.",
+      "Resolucao ponta a ponta: coletar sede/local, tipo de veiculo ou circulacao, risco percebido, foto/anexo, acionar seguranca/portaria/manutencao, classificar se e regra, OS ou projeto, informar decisao e acompanhar reincidencia.",
+      "Areas: Portaria, seguranca, patrimonio/manutencao, operacoes e diretoria quando envolver investimento ou politica de uso."
+    ]
+  },
+  "31": {
+    "title": "UC-31 - Beneficios, convenios, Clube na Mala e cartas para clubes parceiros",
+    "lines": [
+      "Como associado que quer usar beneficios externos ou visitar clube parceiro",
+      "Quando preciso de carta de apresentacao, Clube na Mala, informacao de convenio, clube associado, beneficio com instituicao parceira ou regra para usar estrutura fora do RJ",
+      "Eu quero solicitar pelo celular e receber documento/orientacao antes da viagem ou uso do beneficio",
+      "Para que eu nao dependa de e-mail manual da secretaria nem perca prazo de acesso",
+      "Critica: apesar de menor volume, esses registros aparecem de forma consistente na base historica e tem prazo claro: viagem, fim de semana, evento ou uso de beneficio. Eles tambem misturam secretaria, relacionamento institucional e regras de entidades parceiras.",
+      "Resolucao ponta a ponta: validar adimplencia/categoria, coletar destino/periodo/pessoas, gerar carta ou orientacao padronizada, registrar envio, arquivar comprovante e atualizar base de convenios.",
+      "Areas: Secretaria, atendimento, relacionamento institucional e financeiro quando houver validacao de situacao do associado."
+    ]
+  },
+  "01": {
+    "title": "UC-01 - Ponto unico de contato para qualquer demanda",
+    "lines": [
+      "Como um socio, dependente ou responsavel familiar",
+      "Quando eu tenho uma demanda financeira, esportiva, de manutencao, acesso, evento ou administracao em qualquer unidade",
+      "Eu quero abrir o chamado pelo WhatsApp, app, e-mail, Instagram, Jivo, SAC, telefone ou atendimento presencial sem descobrir qual setor acionar",
+      "Para que o clube assuma a triagem interna e eu acompanhe tudo por protocolo, prazo e status",
+      "Critica: este e o caso de uso estruturante. Sem ele, todos os outros continuam fragmentados. O sistema deve sempre criar ou localizar um ticket, mesmo que a entrada venha por mensagem informal, WhatsApp individual, Jivo, SAC, ligacao ou atendimento presencial.",
+      "Resolucao ponta a ponta: identificar associado, classificar area/sede/urgencia, informar SLA, rotear, atualizar status, encerrar com confirmacao e CSAT.",
+      "Canais prioritarios: WhatsApp e app/portal; telefone/presencial como abertura assistida; e-mail/Jivo/SAC como canais de transicao; Instagram apenas para captura e redirecionamento privado."
+    ]
+  },
+  "02": {
+    "title": "UC-02 - Segunda via de boleto, boleto vencido e regularizacao rapida",
+    "lines": [
+      "Como um socio titular ou responsavel financeiro",
+      "Quando eu preciso pagar uma mensalidade ou servico vencido, consultar vencimento, emitir segunda via ou receber link de pagamento",
+      "Eu quero pedir pelo WhatsApp, app ou atendimento assistido e receber o boleto/link de pagamento no mesmo canal, sem esperar atendimento humano quando for simples",
+      "Para que eu regularize minha situacao e evite bloqueio de acesso ou desligamento",
+      "Critica: esta demanda nao deveria consumir atendente na maioria dos casos. O FAQ ja mostra que pagamentos, boletos e formas de pagamento sao duvidas recorrentes.",
+      "Resolucao ponta a ponta: consultar ERP, gerar boleto atualizado, enviar instrucoes, registrar entrega, abrir ticket humano se houver erro ou restricao.",
+      "Automacao: alta. Deve ser self-service 24h com fallback para financeiro."
+    ]
+  },
+  "03": {
+    "title": "UC-03 - Contestacao de cobranca, extrato e composicao da mensalidade",
+    "lines": [
+      "Como um socio titular",
+      "Quando eu nao entendo um valor cobrado, taxa bancaria, desconto de servicos, taxa de reserva ou servico ativo",
+      "Eu quero receber o extrato detalhado e contestar itens no mesmo chamado",
+      "Para que a divergencia seja corrigida ou explicada formalmente sem repetir a historia para varias pessoas",
+      "Critica: a contestacao e diferente da segunda via. Ela exige historico, anexos, decisao e eventualmente estorno. Nao deve ser tratada como FAQ simples.",
+      "Resolucao ponta a ponta: anexar fatura/extrato, consultar ERP, classificar item contestado, aprovar correcao/estorno quando cabivel, informar decisao e atualizar financeiro.",
+      "Areas: Financeiro, secretaria, coordenacao da atividade e, em casos sensiveis, gestao."
+    ]
+  },
+  "04": {
+    "title": "UC-04 - Cancelamento de servico, modalidade, academia ou atividade paga",
+    "lines": [
+      "Como um socio ou responsavel por dependente",
+      "Quando eu quero cancelar academia, modalidade esportiva, Escola de Artes, Recreio LAB, HighLab ou outro servico pago",
+      "Eu quero solicitar pelo celular, entender a regra de cobranca do mes e receber comprovante de cancelamento",
+      "Para que eu nao seja cobrado novamente e tenha previsibilidade financeira",
+      "Critica: cancelamento envolve atendimento, area tecnica e financeiro. Se o socio e mandado de um setor para outro, a experiencia deteriora rapidamente.",
+      "Resolucao ponta a ponta: validar titularidade, explicar regra, registrar data efetiva, atualizar ERP, notificar coordenacao da atividade e confirmar no WhatsApp/app.",
+      "Risco operacional: cancelamento fora de prazo deve gerar resposta clara, nao silencio."
+    ]
+  },
+  "05": {
+    "title": "UC-05 - Atualizacao cadastral, dependentes e documentos",
+    "lines": [
+      "Como um socio titular",
+      "Quando eu preciso atualizar foto, telefone, e-mail, endereco, preferencia de comunicacao, dados de dependente ou documentos familiares",
+      "Eu quero enviar as informacoes pelo celular com validacao segura",
+      "Para que meu cadastro, comunicacoes, acesso e cobrancas fiquem corretos sem ir presencialmente a secretaria",
+      "Critica: cadastro errado causa problemas em cadeia: boleto nao recebido, convidado barrado, dependente sem acesso, comunicacao perdida ou pedido de descadastro de e-mail ignorado.",
+      "Resolucao ponta a ponta: coletar dados/documentos, validar identidade, atualizar ERP ou abrir tarefa para secretaria, registrar comprovante e confirmar conclusao.",
+      "Privacidade: exige controle LGPD, anexos protegidos e trilha de auditoria. Movimentacoes de titulo e categoria societaria devem seguir o UC-26, pois exigem rito proprio."
+    ]
+  },
+  "06": {
+    "title": "UC-06 - Falha de reconhecimento facial, digital, catraca ou acesso",
+    "lines": [
+      "Como um associado ou dependente",
+      "Quando minha facial, digital, carteirinha, app ou catraca nao libera a entrada",
+      "Eu quero acionar o atendimento na hora pelo celular ou pela portaria",
+      "Para que meu acesso seja resolvido sem constrangimento e sem perder a atividade que eu vim realizar",
+      "Critica: acesso e momento de alta sensibilidade. O FAQ mostra que facial/digital e recadastro nas secretarias ja sao temas formais; no uso real, a resolucao precisa acontecer na portaria.",
+      "Resolucao ponta a ponta: portaria abre ticket ou usa fluxo rapido, valida identidade, consulta situacao financeira/cadastral, libera excecao quando permitido, agenda recadastro se necessario.",
+      "Areas: Portaria, secretaria, financeiro e TI/acessos."
+    ]
+  },
+  "07": {
+    "title": "UC-07 - Acesso de visitantes, convidados, babas e acompanhantes",
+    "lines": [
+      "Como um socio responsavel por convidados, filhos ou evento",
+      "Quando preciso cadastrar visitante, baba, acompanhante de menor ou lista de convidados",
+      "Eu quero enviar a lista/documentos pelo celular e receber confirmacao antes da chegada",
+      "Para que a portaria tenha autorizacao correta e meus convidados nao sejam barrados",
+      "Critica: o site exige antecedencia para listas de convidados e documentos para babas/acompanhantes. Isso e ideal para automacao guiada com prazo e checklist.",
+      "Resolucao ponta a ponta: coletar lista/documentos, validar prazo/regra/capacidade, integrar com portaria, calcular taxas se houver, confirmar liberacao e registrar check-in/check-out quando aplicavel.",
+      "Canais: WhatsApp para envio; app/portal para lista estruturada quando houver muitos convidados."
+    ]
+  },
+  "08": {
+    "title": "UC-08 - Reserva de recantos, quiosques, churrasqueiras, quadras e espacos",
+    "lines": [
+      "Como um socio que quer usar um espaco do clube",
+      "Quando eu preciso reservar, alterar, cancelar ou resolver problema em uma reserva de recanto, quiosque, churrasqueira, quadra, salao, sala, coworking ou espaco de apoio",
+      "Eu quero ver disponibilidade, regras, valores, convidados e status pelo celular",
+      "Para que minha experiencia de lazer ou evento nao dependa de ligacoes e confirmacoes manuais",
+      "Critica: reservas cruzam locacoes, financeiro, portaria, manutencao e governanca de regras. O ticket deve carregar data, unidade, espaco e responsavel.",
+      "Resolucao ponta a ponta: consultar disponibilidade, confirmar reserva, gerar cobranca, orientar regras, integrar lista de convidados, abrir vistoria/manutencao se houver problema no espaco.",
+      "Automacao: media/alta, se houver API no sistema de reservas/ERP."
+    ]
+  },
+  "09": {
+    "title": "UC-09 - Compra de ingressos e inscricao em eventos sociais/culturais",
+    "lines": [
+      "Como um socio ou dependente",
+      "Quando quero comprar ingresso, confirmar presenca, transferir convite ou tirar duvida sobre evento social/cultural",
+      "Eu quero resolver pelo WhatsApp/app e receber comprovante digital",
+      "Para que eu entre no evento sem fila, impressao ou incerteza",
+      "Critica: eventos geram picos de demanda. Se o atendimento nao tratar lote, pagamento, elegibilidade e acesso, a fila vai para Instagram, grupos e portaria.",
+      "Resolucao ponta a ponta: informar evento, validar categoria/dependente, vender/reservar ingresso, enviar QR code/comprovante, sincronizar com portaria e responder duvidas.",
+      "Areas: Social/cultural, financeiro, comunicacao e portaria."
+    ]
+  }
+};
+
 const CL_LABELS = {front:"Front door", fin:"Financeiro", acesso:"Acesso/eventos", esporte:"Esporte/bem-estar", manut:"Manutenção", gov:"Governança", soc:"Sociedade"};
 
 let curPr = "all", curCl = "all", curQ = "";
 const grid = document.getElementById("ucgrid");
 const countEl = document.getElementById("uccount");
 
+function escapeHtml(value){
+  return String(value).replace(/[&<>"']/g, char => ({
+    "&":"&amp;",
+    "<":"&lt;",
+    ">":"&gt;",
+    "\"":"&quot;",
+    "'":"&#39;"
+  }[char]));
+}
+
+function renderFullLine(line){
+  const journey = line.match(/^(Como|Quando|Eu quero|Para que)\s+(.+)$/);
+  if(journey){
+    return `<div class="uc-full-line"><strong>${escapeHtml(journey[1])}</strong> ${escapeHtml(journey[2])}</div>`;
+  }
+  const labeled = line.match(/^([^:]{2,48}):\s*(.+)$/);
+  if(labeled){
+    return `<div class="uc-full-line"><strong>${escapeHtml(labeled[1])}:</strong> ${escapeHtml(labeled[2])}</div>`;
+  }
+  return `<div class="uc-full-line">${escapeHtml(line)}</div>`;
+}
+
+function renderFullDetail(u){
+  const detail = UC_FULL_DETAILS[u.id];
+  if(!detail) return "";
+  return `
+    <div class="uc-full">
+      <div class="uc-full-title">${escapeHtml(detail.title)}</div>
+      <div class="uc-full-lines">${detail.lines.map(renderFullLine).join("")}</div>
+    </div>`;
+}
+
 function render(){
   const q = curQ.trim().toLowerCase();
-  const items = USE_CASES.filter(u =>
-    (curPr==="all" || u.pr===curPr) &&
-    (curCl==="all" || u.cl===curCl) &&
-    (q==="" || ("uc-"+u.id+" "+u.t+" "+u.p+" "+u.d).toLowerCase().includes(q))
-  );
+  const items = USE_CASES.filter(u => {
+    const detail = UC_FULL_DETAILS[u.id];
+    const haystack = ["uc-"+u.id, u.t, u.p, u.d, detail?.title, ...(detail?.lines || [])].join(" ").toLowerCase();
+    return (curPr==="all" || u.pr===curPr) &&
+      (curCl==="all" || u.cl===curCl) &&
+      (q==="" || haystack.includes(q));
+  });
   grid.innerHTML = items.map(u => `
     <article class="uc" data-id="${u.id}">
       <div class="uc-head" role="button" tabindex="0" aria-expanded="false">
         <span class="uc-code" data-pr="${u.pr}">UC-${u.id}</span>
         <div class="uc-main">
-          <div class="uc-title">${u.t}</div>
-          <div class="uc-persona">${u.p}</div>
+          <div class="uc-title">${escapeHtml(u.t)}</div>
+          <div class="uc-persona">${escapeHtml(u.p)}</div>
           <div class="uc-tags">
             <span class="tg pr ${u.pr}">${u.pr}</span>
             <span class="tg cl">${CL_LABELS[u.cl]}</span>
@@ -781,7 +1211,7 @@ function render(){
         </div>
         <span class="uc-toggle">+</span>
       </div>
-      <div class="uc-body"><div class="uc-body-inner"><p>${u.d}</p></div></div>
+      <div class="uc-body"><div class="uc-body-inner"><div class="uc-summary"><p>${escapeHtml(u.d)}</p></div>${renderFullDetail(u)}</div></div>
     </article>`).join("");
   countEl.textContent = `Mostrando ${items.length} de ${USE_CASES.length} casos de uso` +
     (curPr!=="all" ? ` · ${curPr}` : "") + (curCl!=="all" ? ` · ${CL_LABELS[curCl]}` : "") + (q ? ` · “${curQ}”` : "");
