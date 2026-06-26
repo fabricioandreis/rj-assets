@@ -1,0 +1,862 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>RJ-Service — Um só canal para o sócio · Plano para o Conselho Executivo</title>
+<meta name="description" content="Plano do novo sistema de atendimento do Recreio da Juventude: um front door único para o associado, com 31 casos de uso, comparativo de plataformas e próximos passos. Material para revisão do Conselho Executivo." />
+<meta property="og:title" content="RJ-Service — Um só canal para o sócio" />
+<meta property="og:description" content="O plano do novo atendimento do Recreio da Juventude, para revisão do Conselho Executivo." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700;800&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --g500:#00973d; --g400:#24bf63; --g300:#5ed48a; --g900:#0c4728; --g700:#0a6a32;
+    --g50:#eef9f2; --g100:#dcf2e4;
+    --ink:#141f18; --ink2:#3c4f43; --muted:#6b8075; --line:#dce8e1;
+    --surface:#ffffff; --soft:#f4f8f5; --soft2:#eef4f0;
+    --warn:#b45309; --warnbg:#fff7ed; --danger:#b91c1c; --dangerbg:#fef2f2;
+    --p0:#00973d; --p1:#0e7490; --p2:#7c3aed;
+    --shadow-lg:0 32px 80px rgba(6,38,20,.16);
+    --shadow-md:0 14px 36px rgba(6,38,20,.10);
+    --shadow-sm:0 4px 16px rgba(6,38,20,.06);
+    --r-xl:28px; --r-lg:20px; --r-md:14px; --r-sm:10px; --r-pill:999px;
+    --serif:"Barlow", system-ui, sans-serif;
+    --body:"Lato", "Barlow", system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+    --maxw:1140px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth; scroll-padding-top:78px;}
+  body{
+    margin:0; font-family:var(--body); color:var(--ink2);
+    background:var(--surface); font-size:17px; line-height:1.62;
+    -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+  }
+  h1,h2,h3,h4{font-family:var(--serif); color:var(--ink); line-height:1.12; margin:0; font-weight:700;}
+  p{margin:0 0 1em;}
+  a{color:var(--g700); text-decoration:none;}
+  a:hover{text-decoration:underline;}
+  .wrap{max-width:var(--maxw); margin:0 auto; padding:0 24px;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:var(--serif); font-weight:700; font-size:.78rem; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--g500); margin-bottom:18px;
+  }
+  .eyebrow::before{content:""; width:26px; height:2px; background:var(--g400); border-radius:2px;}
+  section{padding:92px 0; position:relative;}
+  .section-head{max-width:760px; margin-bottom:46px;}
+  .section-head h2{font-size:clamp(1.9rem,4vw,2.7rem); font-weight:800; letter-spacing:-.01em;}
+  .section-head p.lead{font-size:1.12rem; color:var(--ink2); margin-top:16px;}
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.in{opacity:1; transform:none;}
+
+  /* ===== Top nav ===== */
+  header.nav{
+    position:sticky; top:0; z-index:50; background:rgba(255,255,255,.86);
+    backdrop-filter:saturate(160%) blur(14px); border-bottom:1px solid transparent;
+    transition:border-color .3s, box-shadow .3s;
+  }
+  header.nav.scrolled{border-color:var(--line); box-shadow:0 6px 22px rgba(6,38,20,.05);}
+  .nav-inner{display:flex; align-items:center; gap:22px; height:64px;}
+  .brand{display:flex; align-items:center; gap:11px; font-family:var(--serif); font-weight:800; color:var(--g900); letter-spacing:-.01em; white-space:nowrap;}
+  .brand .mono{
+    width:34px; height:34px; border-radius:10px; display:grid; place-items:center;
+    background:linear-gradient(145deg,var(--g500),var(--g900)); color:#fff; font-size:.85rem; font-weight:800;
+    box-shadow:0 6px 14px rgba(0,151,61,.32);
+  }
+  .brand small{display:block; font-family:var(--body); font-weight:400; font-size:.66rem; color:var(--muted); letter-spacing:.02em;}
+  .nav-links{margin-left:auto; display:flex; gap:4px; overflow-x:auto; scrollbar-width:none;}
+  .nav-links::-webkit-scrollbar{display:none;}
+  .nav-links a{
+    font-family:var(--serif); font-weight:600; font-size:.92rem; color:var(--ink2);
+    padding:8px 12px; border-radius:var(--r-pill); white-space:nowrap; transition:background .2s,color .2s;
+  }
+  .nav-links a:hover{background:var(--g50); text-decoration:none;}
+  .nav-links a.active{background:var(--g900); color:#fff;}
+  @media(max-width:820px){ .nav-links{display:none;} }
+
+  /* ===== Hero ===== */
+  .hero{
+    color:#fff; padding:84px 0 90px; overflow:hidden; position:relative;
+    background:
+      radial-gradient(ellipse at 12% 8%, rgba(36,191,99,.40) 0%, transparent 46%),
+      radial-gradient(ellipse at 88% 14%, rgba(94,212,138,.26) 0%, transparent 42%),
+      radial-gradient(ellipse at 60% 110%, rgba(0,151,61,.30) 0%, transparent 50%),
+      linear-gradient(160deg,#0a3d22 0%, #0c4728 42%, #08381e 100%);
+  }
+  .hero::after{
+    content:""; position:absolute; inset:0; pointer-events:none; opacity:.5;
+    background-image:radial-gradient(rgba(255,255,255,.06) 1px, transparent 1px);
+    background-size:26px 26px; mask-image:linear-gradient(to bottom, rgba(0,0,0,.8), transparent 80%);
+  }
+  .hero .wrap{position:relative; z-index:2;}
+  .hero-logo{height:74px; width:auto; margin-bottom:30px; display:block; filter:drop-shadow(0 6px 18px rgba(0,0,0,.25));}
+  .hero-tag{
+    display:inline-flex; align-items:center; gap:9px; font-family:var(--serif); font-weight:600;
+    font-size:.82rem; letter-spacing:.06em; text-transform:uppercase;
+    background:rgba(255,255,255,.12); border:1px solid rgba(255,255,255,.22);
+    padding:7px 15px; border-radius:var(--r-pill); margin-bottom:26px; color:#eafff2;
+  }
+  .hero-tag .dot{width:8px; height:8px; border-radius:50%; background:var(--g300); box-shadow:0 0 0 4px rgba(94,212,138,.25);}
+  .hero h1{
+    font-size:clamp(2.3rem,5.4vw,4rem); font-weight:800; color:#fff; letter-spacing:-.02em;
+    max-width:16ch;
+  }
+  .hero h1 .hl{color:var(--g300);}
+  .hero .sub{font-size:clamp(1.05rem,2.1vw,1.32rem); color:#cfeeda; max-width:62ch; margin-top:22px;}
+  .hero-cta{display:flex; flex-wrap:wrap; gap:14px; margin-top:34px;}
+  .btn{
+    display:inline-flex; align-items:center; gap:9px; font-family:var(--serif); font-weight:700;
+    font-size:1rem; padding:14px 24px; border-radius:var(--r-pill); cursor:pointer; border:none;
+    transition:transform .18s, box-shadow .18s, background .18s; text-decoration:none;
+  }
+  .btn-primary{background:var(--g400); color:#06291a; box-shadow:0 14px 30px rgba(36,191,99,.34);}
+  .btn-primary:hover{transform:translateY(-2px); box-shadow:0 18px 38px rgba(36,191,99,.42); text-decoration:none;}
+  .btn-ghost{background:rgba(255,255,255,.10); color:#fff; border:1px solid rgba(255,255,255,.28);}
+  .btn-ghost:hover{background:rgba(255,255,255,.18); text-decoration:none; transform:translateY(-2px);}
+  .hero-stats{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-top:58px;
+    border-top:1px solid rgba(255,255,255,.16); padding-top:34px;
+  }
+  .hstat .num{font-family:var(--serif); font-weight:800; font-size:clamp(1.8rem,3.4vw,2.7rem); color:#fff; line-height:1;}
+  .hstat .lbl{font-size:.86rem; color:#a9d8bd; margin-top:8px; letter-spacing:.01em;}
+  @media(max-width:680px){ .hero-stats{grid-template-columns:repeat(2,1fr); gap:26px 18px;} }
+
+  /* ===== generic cards ===== */
+  .grid{display:grid; gap:22px;}
+  .card{
+    background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg);
+    padding:26px; box-shadow:var(--shadow-sm); transition:transform .2s, box-shadow .2s, border-color .2s;
+  }
+  .card.h:hover{transform:translateY(-4px); box-shadow:var(--shadow-md); border-color:var(--g100);}
+  .card h3{font-size:1.18rem; margin-bottom:8px;}
+  .card p{font-size:.98rem; margin-bottom:0;}
+
+  /* ===== Problema ===== */
+  .problema{background:var(--soft);}
+  .quote{
+    position:relative; background:linear-gradient(150deg,var(--g900),#0a3a20); color:#fff;
+    border-radius:var(--r-xl); padding:46px 44px; box-shadow:var(--shadow-lg); overflow:hidden;
+  }
+  .quote::before{content:"\201C"; position:absolute; top:-18px; left:24px; font-family:var(--serif); font-size:9rem; color:rgba(94,212,138,.30); line-height:1;}
+  .quote p{font-family:var(--serif); font-weight:600; font-size:clamp(1.3rem,2.8vw,1.8rem); line-height:1.32; margin:0; position:relative; z-index:1;}
+  .quote .by{margin-top:18px; font-family:var(--body); font-weight:400; font-size:.95rem; color:#a9d8bd;}
+  .chips{display:flex; flex-wrap:wrap; gap:10px; margin-top:8px;}
+  .chip{
+    font-family:var(--serif); font-weight:600; font-size:.9rem; padding:8px 15px; border-radius:var(--r-pill);
+    background:#fff; border:1px solid var(--line); color:var(--ink2); box-shadow:var(--shadow-sm);
+  }
+  .chip.x{color:var(--danger); border-color:#f3d3d3; background:var(--dangerbg);}
+  .split{display:grid; grid-template-columns:1.05fr .95fr; gap:40px; align-items:center;}
+  @media(max-width:860px){ .split{grid-template-columns:1fr; gap:30px;} }
+
+  /* ===== Evidências ===== */
+  .stat-row{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin-bottom:46px;}
+  .statbox{background:var(--surface); border:1px solid var(--line); border-radius:var(--r-lg); padding:22px; box-shadow:var(--shadow-sm);}
+  .statbox .n{font-family:var(--serif); font-weight:800; font-size:1.9rem; color:var(--g700); line-height:1;}
+  .statbox .t{font-size:.86rem; color:var(--muted); margin-top:8px;}
+  @media(max-width:760px){ .stat-row{grid-template-columns:repeat(2,1fr);} }
+  .bars{display:grid; gap:14px;}
+  .barline{display:grid; grid-template-columns:200px 1fr; align-items:center; gap:16px;}
+  .barline .name{font-size:.92rem; font-weight:700; font-family:var(--serif); color:var(--ink); text-align:right;}
+  .bartrack{background:var(--soft2); border-radius:var(--r-pill); height:30px; position:relative; overflow:hidden;}
+  .barfill{height:100%; border-radius:var(--r-pill); background:linear-gradient(90deg,var(--g500),var(--g400)); width:0; transition:width 1.1s cubic-bezier(.2,.7,.2,1);}
+  .barfill.alt{background:linear-gradient(90deg,#0e7490,#22a5c0);}
+  .barval{position:absolute; right:14px; top:50%; transform:translateY(-50%); font-family:var(--serif); font-weight:700; font-size:.86rem; color:var(--ink);}
+  @media(max-width:620px){ .barline{grid-template-columns:1fr;} .barline .name{text-align:left;} }
+  .twocol{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
+  @media(max-width:860px){ .twocol{grid-template-columns:1fr; gap:40px;} }
+  .src-note{font-size:.85rem; color:var(--muted); margin-top:24px;}
+
+  /* ===== Visão ===== */
+  .visao{background:linear-gradient(180deg,#fff, var(--g50));}
+  .channels{display:grid; grid-template-columns:repeat(4,1fr); gap:18px; margin:8px 0 38px;}
+  @media(max-width:860px){ .channels{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:520px){ .channels{grid-template-columns:1fr;} }
+  .chan{position:relative; background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:24px; box-shadow:var(--shadow-sm);}
+  .chan .ic{width:46px; height:46px; border-radius:12px; display:grid; place-items:center; font-size:1.4rem; background:var(--g50); margin-bottom:14px;}
+  .chan h4{font-size:1.06rem; margin-bottom:4px;}
+  .chan .role{font-family:var(--serif); font-weight:700; font-size:.74rem; letter-spacing:.08em; text-transform:uppercase; color:var(--g500); margin-bottom:8px;}
+  .chan p{font-size:.92rem; margin:0; color:var(--ink2);}
+  .principle{
+    display:flex; gap:20px; align-items:flex-start; background:#fff; border:1px solid var(--g100);
+    border-left:5px solid var(--g500); border-radius:var(--r-lg); padding:26px 28px; box-shadow:var(--shadow-sm);
+  }
+  .principle .k{font-size:2rem;}
+  .principle h4{font-size:1.12rem; margin-bottom:6px;}
+  .principle p{margin:0; font-size:.98rem;}
+  .principle + .principle{margin-top:16px;}
+
+  /* ===== Casos de uso ===== */
+  .controls{display:flex; flex-wrap:wrap; gap:14px; align-items:center; margin-bottom:14px;}
+  .filterset{display:flex; flex-wrap:wrap; gap:8px;}
+  .fbtn{
+    font-family:var(--serif); font-weight:600; font-size:.88rem; padding:8px 15px; border-radius:var(--r-pill);
+    background:#fff; border:1px solid var(--line); color:var(--ink2); cursor:pointer; transition:all .18s;
+  }
+  .fbtn:hover{border-color:var(--g300);}
+  .fbtn.active{background:var(--g900); color:#fff; border-color:var(--g900);}
+  .search{
+    flex:1 1 220px; min-width:180px; display:flex; align-items:center; gap:8px; background:#fff;
+    border:1px solid var(--line); border-radius:var(--r-pill); padding:8px 16px;
+  }
+  .search input{border:none; outline:none; flex:1; font-family:var(--body); font-size:.95rem; color:var(--ink); background:transparent;}
+  .uc-count{font-size:.86rem; color:var(--muted); margin:4px 0 22px;}
+  .uc-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+  @media(max-width:820px){ .uc-grid{grid-template-columns:1fr;} }
+  .uc{
+    border:1px solid var(--line); border-radius:var(--r-lg); background:#fff; box-shadow:var(--shadow-sm);
+    overflow:hidden; transition:box-shadow .2s, border-color .2s; height:fit-content;
+  }
+  .uc:hover{border-color:var(--g100); box-shadow:var(--shadow-md);}
+  .uc-head{display:flex; gap:14px; align-items:flex-start; padding:20px 22px; cursor:pointer; user-select:none;}
+  .uc-code{
+    font-family:var(--serif); font-weight:800; font-size:.82rem; letter-spacing:.02em; color:#fff;
+    background:var(--g700); padding:5px 9px; border-radius:8px; white-space:nowrap; flex-shrink:0; margin-top:2px;
+  }
+  .uc-code[data-pr="P0"]{background:var(--p0);} .uc-code[data-pr="P1"]{background:var(--p1);} .uc-code[data-pr="P2"]{background:var(--p2);}
+  .uc-main{flex:1; min-width:0;}
+  .uc-title{font-family:var(--serif); font-weight:700; font-size:1.04rem; color:var(--ink); line-height:1.22;}
+  .uc-persona{font-size:.9rem; color:var(--muted); margin-top:4px;}
+  .uc-tags{display:flex; gap:7px; margin-top:10px; flex-wrap:wrap;}
+  .tg{font-family:var(--serif); font-weight:600; font-size:.7rem; letter-spacing:.04em; text-transform:uppercase; padding:4px 9px; border-radius:var(--r-pill);}
+  .tg.pr{color:#fff;} .tg.pr.P0{background:var(--p0);} .tg.pr.P1{background:var(--p1);} .tg.pr.P2{background:var(--p2);}
+  .tg.cl{background:var(--g50); color:var(--g700);}
+  .uc-toggle{flex-shrink:0; width:28px; height:28px; border-radius:50%; display:grid; place-items:center; background:var(--soft); color:var(--g700); font-size:1.1rem; transition:transform .25s, background .2s; margin-top:2px;}
+  .uc.open .uc-toggle{transform:rotate(45deg); background:var(--g900); color:#fff;}
+  .uc-body{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+  .uc-body-inner{padding:0 22px 22px; border-top:1px solid var(--line); margin-top:0;}
+  .uc-body-inner p{font-size:.95rem; margin:16px 0 0; color:var(--ink2);}
+
+  /* ===== Prioridades ===== */
+  .prioridades{background:var(--soft);}
+  .phases{display:grid; grid-template-columns:repeat(3,1fr); gap:20px;}
+  @media(max-width:860px){ .phases{grid-template-columns:1fr;} }
+  .phase{background:#fff; border:1px solid var(--line); border-radius:var(--r-lg); padding:26px; box-shadow:var(--shadow-sm); position:relative; overflow:hidden;}
+  .phase::before{content:""; position:absolute; top:0; left:0; right:0; height:5px;}
+  .phase.P0::before{background:var(--p0);} .phase.P1::before{background:var(--p1);} .phase.P2::before{background:var(--p2);}
+  .phase .ph-tag{font-family:var(--serif); font-weight:800; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase;}
+  .phase.P0 .ph-tag{color:var(--p0);} .phase.P1 .ph-tag{color:var(--p1);} .phase.P2 .ph-tag{color:var(--p2);}
+  .phase h3{font-size:1.28rem; margin:6px 0 4px;}
+  .phase .when{font-size:.9rem; color:var(--muted); margin-bottom:14px;}
+  .phase .motivo{font-size:.92rem; color:var(--ink2); margin-bottom:16px;}
+  .uc-mini{display:flex; flex-wrap:wrap; gap:6px;}
+  .uc-mini span{font-family:var(--serif); font-weight:700; font-size:.72rem; padding:4px 8px; border-radius:6px; background:var(--soft2); color:var(--ink2);}
+
+  /* ===== Plataformas ===== */
+  .table-wrap{overflow-x:auto; border:1px solid var(--line); border-radius:var(--r-lg); box-shadow:var(--shadow-sm); -webkit-overflow-scrolling:touch;}
+  table.cmp{width:100%; border-collapse:collapse; min-width:720px; background:#fff;}
+  table.cmp th, table.cmp td{padding:15px 16px; text-align:left; border-bottom:1px solid var(--line); font-size:.94rem;}
+  table.cmp thead th{background:var(--g900); color:#fff; font-family:var(--serif); font-weight:600; font-size:.86rem; letter-spacing:.02em; position:sticky; top:0;}
+  table.cmp tbody tr:hover{background:var(--g50);}
+  table.cmp td.plat{font-family:var(--serif); font-weight:700; color:var(--ink);}
+  table.cmp td.plat small{display:block; font-family:var(--body); font-weight:400; color:var(--muted); font-size:.82rem;}
+  table.cmp .yes{color:var(--g500); font-weight:700;}
+  table.cmp .cost{font-family:var(--serif); font-weight:700; color:var(--g700); white-space:nowrap;}
+  .badge-rank{display:inline-grid; place-items:center; width:24px; height:24px; border-radius:50%; background:var(--g50); color:var(--g700); font-family:var(--serif); font-weight:800; font-size:.8rem; margin-right:8px;}
+  .scroll-hint{font-size:.8rem; color:var(--muted); margin-top:10px; display:none;}
+  @media(max-width:760px){ .scroll-hint{display:block;} }
+
+  /* ===== Decisão ===== */
+  .decisao{background:linear-gradient(180deg,var(--g50),#fff);}
+  .paths{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
+  @media(max-width:820px){ .paths{grid-template-columns:1fr;} }
+  .path{background:#fff; border:1px solid var(--line); border-radius:var(--r-xl); padding:30px; box-shadow:var(--shadow-md);}
+  .path .ptag{font-family:var(--serif); font-weight:800; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--g500);}
+  .path.b{border:2px solid var(--g400); position:relative;}
+  .path.b .ribbon{position:absolute; top:18px; right:-2px; background:var(--g500); color:#fff; font-family:var(--serif); font-weight:700; font-size:.72rem; letter-spacing:.06em; padding:5px 14px 5px 12px; border-radius:var(--r-pill) 0 0 var(--r-pill);}
+  .path h3{font-size:1.4rem; margin:8px 0 6px;}
+  .path .pcost{font-family:var(--serif); font-weight:800; font-size:1.5rem; color:var(--g700); margin:10px 0 18px;}
+  .path .pcost small{font-family:var(--body); font-weight:400; font-size:.84rem; color:var(--muted);}
+  .plist{list-style:none; padding:0; margin:0;}
+  .plist li{display:flex; gap:10px; font-size:.94rem; margin-bottom:10px; align-items:flex-start;}
+  .plist li .m{flex-shrink:0; font-weight:700;}
+  .plist li.pro .m{color:var(--g500);} .plist li.con .m{color:var(--warn);}
+
+  /* ===== Próximos passos ===== */
+  .proximos{background:var(--g900); color:#dff3e6;}
+  .proximos .section-head h2{color:#fff;}
+  .proximos .section-head p.lead{color:#bfe6cd;}
+  .proximos .eyebrow{color:var(--g300);}
+  .proximos .eyebrow::before{background:var(--g300);}
+  .steps{display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-bottom:46px;}
+  @media(max-width:820px){ .steps{grid-template-columns:1fr;} }
+  .step{background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:var(--r-lg); padding:24px;}
+  .step .sn{font-family:var(--serif); font-weight:800; font-size:1.6rem; color:var(--g300);}
+  .step h4{color:#fff; font-size:1.1rem; margin:6px 0 8px;}
+  .step p{color:#bfe6cd; font-size:.93rem; margin:0;}
+  .poc-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:12px;}
+  @media(max-width:680px){ .poc-grid{grid-template-columns:1fr;} }
+  .poc{display:flex; gap:12px; align-items:flex-start; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:var(--r-md); padding:14px 16px;}
+  .poc .chk{flex-shrink:0; width:24px; height:24px; border-radius:7px; background:var(--g400); color:#06291a; display:grid; place-items:center; font-weight:800; font-size:.8rem;}
+  .poc span{font-size:.92rem; color:#eafff2;}
+
+  /* ===== Métricas ===== */
+  .metricas{background:var(--soft);}
+  .kpi-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+  @media(max-width:860px){ .kpi-grid{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:520px){ .kpi-grid{grid-template-columns:1fr;} }
+  .kpi{background:#fff; border:1px solid var(--line); border-radius:var(--r-md); padding:20px; box-shadow:var(--shadow-sm);}
+  .kpi .ic{font-size:1.4rem;}
+  .kpi p{font-size:.92rem; margin:10px 0 0; color:var(--ink2); font-weight:700; font-family:var(--serif);}
+
+  /* ===== Revisão CTA ===== */
+  .revisao{background:linear-gradient(160deg,#0a3d22,#0c4728);}
+  .cta{
+    background:#fff; border-radius:var(--r-xl); padding:48px; box-shadow:var(--shadow-lg); text-align:center; max-width:880px; margin:0 auto;
+  }
+  .cta h2{font-size:clamp(1.8rem,4vw,2.5rem); font-weight:800; margin-bottom:14px;}
+  .cta > p{font-size:1.1rem; max-width:60ch; margin:0 auto 30px;}
+  .qcards{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin:30px 0; text-align:left;}
+  @media(max-width:720px){ .qcards{grid-template-columns:1fr;} }
+  .qcard{background:var(--g50); border:1px solid var(--g100); border-radius:var(--r-lg); padding:22px;}
+  .qcard .qn{width:34px; height:34px; border-radius:50%; background:var(--g900); color:#fff; display:grid; place-items:center; font-family:var(--serif); font-weight:800; margin-bottom:12px;}
+  .qcard p{font-size:.96rem; margin:0; color:var(--ink2);}
+  .cta-how{font-size:.95rem; color:var(--muted); margin-top:8px;}
+
+  /* ===== Footer ===== */
+  footer.foot{background:#06291a; color:#9ec8ad; padding:54px 0 40px; font-size:.9rem;}
+  footer.foot h4{color:#fff; font-size:1rem; margin-bottom:12px;}
+  .foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:36px; margin-bottom:34px;}
+  @media(max-width:760px){ .foot-grid{grid-template-columns:1fr; gap:26px;} }
+  footer.foot a{color:#7fd6a1;}
+  footer.foot ul{list-style:none; padding:0; margin:0;}
+  footer.foot li{margin-bottom:8px;}
+  .foot-bottom{border-top:1px solid rgba(255,255,255,.12); padding-top:22px; display:flex; flex-wrap:wrap; gap:10px; justify-content:space-between; font-size:.82rem; color:#6fa784;}
+
+  @media print{
+    header.nav, .hero-cta, .controls, .scroll-hint{display:none !important;}
+    .uc-body{max-height:none !important;} .reveal{opacity:1 !important; transform:none !important;}
+    section{padding:30px 0; page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<header class="nav" id="nav">
+  <div class="wrap nav-inner">
+    <div class="brand">
+      <span class="mono">RJ</span>
+      <span>RJ-Service<small>Recreio da Juventude</small></span>
+    </div>
+    <nav class="nav-links" id="navlinks">
+      <a href="#problema">Problema</a>
+      <a href="#evidencias">Evidências</a>
+      <a href="#visao">Visão</a>
+      <a href="#casos">Casos de uso</a>
+      <a href="#prioridades">Prioridades</a>
+      <a href="#plataformas">Plataformas</a>
+      <a href="#decisao">Decisão</a>
+      <a href="#revisao">Revisão</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="inicio">
+  <div class="wrap">
+    <svg class="hero-logo" viewBox="167 -3 66 74" xmlns="http://www.w3.org/2000/svg" aria-label="Recreio da Juventude">
+      <path d="M193.068 7.6586H204.417C204.445 7.6586 204.467 7.64744 204.487 7.62734C204.507 7.60724 204.516 7.58045 204.513 7.55142C204.311 3.79339 201.247 0.848145 197.539 0.848145H186.19C186.164 0.848145 186.14 0.859309 186.122 0.879406C186.103 0.899502 186.094 0.926297 186.094 0.955325C186.296 4.71559 189.36 7.6586 193.07 7.6586" fill="#fff"/>
+      <path d="M222.05 60.3291C220.061 57.692 219.091 53.7643 218.144 50.5288C216.847 46.0942 214.629 42.7001 213.15 40.6704C213.003 40.4672 213.047 40.1858 213.242 40.0317C213.849 39.5561 214.423 39.0358 214.95 38.4888C217.777 35.5569 219.461 32.3058 219.689 28.224C219.953 23.5102 218.359 19.0421 215.203 15.6481C211.998 12.2026 207.62 10.3069 202.872 10.3069H173.172C173.143 10.3069 173.119 10.3158 173.102 10.3359C173.084 10.356 173.075 10.3828 173.075 10.4141C173.271 14.0671 176.135 16.9454 179.733 17.1106C180.069 17.1263 180.333 17.4032 180.333 17.7448V54.9768C180.333 55.9771 180.953 56.8636 181.876 57.2142C182.808 57.567 183.705 57.7211 184.364 57.7211C184.837 57.7211 185.318 57.6563 185.793 57.529C186.039 57.462 186.277 57.3772 186.51 57.2812C186.571 57.2566 186.833 57.0936 186.886 57.0222C186.982 56.8949 187.037 56.7363 187.037 56.5711V50.1715C187.037 41.9878 189.286 38.8684 190.246 37.5375L190.33 37.4214C190.468 37.2272 190.526 37.0552 190.501 36.9079C190.477 36.7694 190.376 36.6377 190.202 36.5171C188.149 35.1036 187.037 33.132 187.037 26.7592V17.756C187.037 17.4032 187.321 17.1151 187.668 17.1151H203.039C204.789 17.1151 206.514 17.5863 208.026 18.475C211.102 20.2836 213.012 23.6442 213.012 27.2482C213.012 30.8521 211.102 33.6009 208.026 35.4096C206.899 36.0727 205.672 36.4992 204.384 36.6779C204.292 36.6913 204.217 36.7538 204.184 36.8453C204.151 36.9391 204.171 37.0374 204.239 37.1088C205.721 38.7121 206.725 42.1396 207.308 44.2207C207.789 45.9468 208.448 48.202 208.719 48.8831C209.627 51.1719 210.708 53.3155 211.935 55.2581C213.568 57.8416 215.41 59.992 217.412 61.651C219.012 62.9439 220.681 63.9286 222.371 64.5717L222.841 64.7526C223.907 65.1634 225.009 65.5899 226.323 65.8423L226.411 65.8601C226.776 65.9316 227.325 66.0387 227.666 66.0387C228.519 66.0387 225.035 64.2859 222.05 60.3291Z" fill="#fff"/>
+      <path d="M200.865 19.9106H193.787C193.75 19.9106 193.721 19.9419 193.721 19.9776V44.8012C193.721 44.8012 193.708 48.95 193.708 49.2894C193.708 54.6172 190.591 58.8039 186.424 59.9249C185.762 60.1013 185.077 60.1995 184.371 60.1995C180.003 60.1995 171.616 56.0552 176.247 44.5779C176.355 44.3099 176.414 44.004 175.902 44.004C171.774 44.004 165.87 52.3976 171.345 59.5966C174.332 63.5244 179.045 66.0141 184.305 66.0342C185.331 66.0275 186.347 65.9315 187.34 65.7439C189.369 65.3554 191.392 64.5426 193.183 63.3971C194.089 62.8143 194.941 62.1466 195.722 61.412C196.458 60.7153 197.126 59.9606 197.72 59.1701C198.636 57.9041 199.384 56.5062 199.927 55.0057C200.582 53.1189 200.92 51.1383 200.931 49.0951C200.931 49.0594 200.933 49.0259 200.933 48.9902V19.9776C200.933 19.9397 200.905 19.9106 200.867 19.9106" fill="#fff"/>
+    </svg>
+    <span class="hero-tag"><span class="dot"></span>Plano para revisão do Conselho Executivo · jun/2026</span>
+    <h1>Um só canal <span class="hl">para o sócio</span>. Toda a complexidade fica com o clube.</h1>
+    <p class="sub">Hoje o associado precisa adivinhar com quem falar — secretaria, financeiro, esporte, portaria, manutenção, Instagram ou um grupo de WhatsApp. O <strong>RJ-Service</strong> propõe um <em>front door</em> único: o sócio manda uma mensagem, recebe protocolo e prazo, e acompanha até resolver. Por dentro, o ticket circula entre as áreas.</p>
+    <div class="hero-cta">
+      <a href="#casos" class="btn btn-primary">Explorar os 31 casos de uso →</a>
+      <a href="#problema" class="btn btn-ghost">Entender o problema</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat"><div class="num" data-count="21615">21.615</div><div class="lbl">associados — maior quadro histórico</div></div>
+      <div class="hstat"><div class="num" data-count="4">4</div><div class="lbl">unidades: Juventude, Guarany, Social, Arena</div></div>
+      <div class="hstat"><div class="num" data-count="12788">12.788</div><div class="lbl">atendimentos reais analisados</div></div>
+      <div class="hstat"><div class="num" data-count="31">31</div><div class="lbl">casos de uso mapeados</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PROBLEMA ===== -->
+<section class="problema" id="problema">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">O problema</span>
+      <h2>Não falta canal. Falta orquestração.</h2>
+      <p class="lead">O clube tem mais de 40 canais de comunicação. O associado é quem paga a conta dessa fragmentação: ele precisa conhecer o organograma interno para saber quem aciona.</p>
+    </div>
+    <div class="split">
+      <div class="reveal">
+        <div class="quote">
+          <p>O problema principal não é falta de canais; é excesso de canais sem orquestração. Isso transfere para o associado a complexidade interna do clube.</p>
+          <div class="by">— Análise crítica do mapa de casos de uso, RJ-Service</div>
+        </div>
+      </div>
+      <div class="reveal">
+        <p style="font-weight:700; font-family:var(--serif); color:var(--ink); margin-bottom:14px;">Por onde o sócio é obrigado a circular hoje:</p>
+        <div class="chips">
+          <span class="chip">WhatsApp oficial</span>
+          <span class="chip x">WhatsApps por setor</span>
+          <span class="chip x">Jivo (até 24h)</span>
+          <span class="chip x">SAC</span>
+          <span class="chip">E-mail</span>
+          <span class="chip">Telefone</span>
+          <span class="chip">Presencial</span>
+          <span class="chip">App</span>
+          <span class="chip x">Instagram</span>
+          <span class="chip x">Grupos informais</span>
+          <span class="chip">SAA</span>
+          <span class="chip x">Clubes Associados (massa)</span>
+        </div>
+        <p style="margin-top:22px; font-size:.96rem;">O mesmo sócio aciona <strong>SAC → Jivo → WhatsApp → telefone → presencial</strong> pela mesma demanda. A duplicidade vira uma das maiores fontes de custo e de percepção de demora. Um sistema novo que vire <em>só mais um canal</em> aumenta a fragmentação — por isso a regra operacional é parte do produto.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EVIDÊNCIAS ===== -->
+<section id="evidencias">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">As evidências</span>
+      <h2>O plano nasce de dados, não de opinião.</h2>
+      <p class="lead">Cada caso de uso foi calibrado contra a operação real do clube: 12.788 atendimentos do SAA classificados registro a registro, relatórios de gestão 2025 e as estatísticas de canais de janeiro a maio de 2026.</p>
+    </div>
+    <div class="stat-row reveal">
+      <div class="statbox"><div class="n" data-count="951866">951.866</div><div class="t">acessos de associados em 2025</div></div>
+      <div class="statbox"><div class="n" data-count="4202">4.202</div><div class="t">inscrições esportivas em 2025</div></div>
+      <div class="statbox"><div class="n" data-count="3886">3.886</div><div class="t">inscritos nas academias</div></div>
+      <div class="statbox"><div class="n">R$ 55,4 mi</div><div class="t">receita realizada · superávit R$ 1,13 mi</div></div>
+    </div>
+    <div class="twocol">
+      <div class="reveal">
+        <h3 style="font-size:1.2rem; margin-bottom:6px;">Volume por canal — jan a mai/2026</h3>
+        <p style="font-size:.9rem; color:var(--muted); margin-bottom:20px;">O Jivo concentra o digital, mas opera com prazo de até 24h e perde conversas. Os controles de telefone, WhatsApps individuais e e-mails ainda são incompletos.</p>
+        <div class="bars">
+          <div class="barline"><div class="name">Jivo (mensagens)</div><div class="bartrack"><div class="barfill" data-pct="100"></div><div class="barval">12.230</div></div></div>
+          <div class="barline"><div class="name">Pagamentos presenciais / links</div><div class="bartrack"><div class="barfill" data-pct="37"></div><div class="barval">4.562</div></div></div>
+          <div class="barline"><div class="name">WhatsApp perdidas no Jivo</div><div class="bartrack"><div class="barfill alt" data-pct="12"></div><div class="barval">1.410</div></div></div>
+          <div class="barline"><div class="name">Atend. — Clubes Associados</div><div class="bartrack"><div class="barfill" data-pct="11"></div><div class="barval">1.365</div></div></div>
+          <div class="barline"><div class="name">SAC por departamento</div><div class="bartrack"><div class="barfill" data-pct="3"></div><div class="barval">382</div></div></div>
+        </div>
+      </div>
+      <div class="reveal">
+        <h3 style="font-size:1.2rem; margin-bottom:6px;">Onde está a demanda real</h3>
+        <p style="font-size:.9rem; color:var(--muted); margin-bottom:20px;">Top motivos na base histórica de 12.788 atendimentos — esportes/matrículas, cadastro, boletos e reservas lideram. É isso que define as prioridades do MVP.</p>
+        <div class="bars">
+          <div class="barline"><div class="name">UC-10 Esportes / matrículas</div><div class="bartrack"><div class="barfill" data-pct="100"></div><div class="barval">1.907</div></div></div>
+          <div class="barline"><div class="name">UC-05 Cadastro / documentos</div><div class="bartrack"><div class="barfill" data-pct="79"></div><div class="barval">1.507</div></div></div>
+          <div class="barline"><div class="name">UC-02 Boletos</div><div class="bartrack"><div class="barfill" data-pct="76"></div><div class="barval">1.455</div></div></div>
+          <div class="barline"><div class="name">UC-08 Reservas de espaços</div><div class="bartrack"><div class="barfill" data-pct="57"></div><div class="barval">1.097</div></div></div>
+          <div class="barline"><div class="name">UC-14 Academia / bem-estar</div><div class="bartrack"><div class="barfill" data-pct="51"></div><div class="barval">973</div></div></div>
+          <div class="barline"><div class="name">UC-17 Regras / informações</div><div class="bartrack"><div class="barfill" data-pct="38"></div><div class="barval">734</div></div></div>
+        </div>
+      </div>
+    </div>
+    <p class="src-note reveal">Fontes: base SAA classificada (12.788 registros) · Relatório de gestão, esportes e demonstrações financeiras 2025 · Relatório de canais e planilha “Número de Atendimento” (jan–mai/2026) · <a href="https://www.recreiodajuventude.com.br/" target="_blank" rel="noopener">site do clube</a> e seu FAQ financeiro e de acessos.</p>
+  </div>
+</section>
+
+<!-- ===== VISÃO ===== -->
+<section class="visao" id="visao">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">A visão</span>
+      <h2>Um front door único, mobile-first e rastreável.</h2>
+      <p class="lead">O associado escolhe o canal. O sistema decide a área, a fila, o SLA, a urgência e o responsável. Cada canal alimenta a mesma fila — inclusive o presencial e o telefone.</p>
+    </div>
+    <div class="channels">
+      <div class="chan reveal"><div class="ic">💬</div><div class="role">Canal primário</div><h4>WhatsApp</h4><p>Abertura e atualização em menos de 60 segundos, com foto, localização e sede. Número oficial único.</p></div>
+      <div class="chan reveal"><div class="ic">📱</div><div class="role">Acompanhamento</div><h4>App / Portal</h4><p>O melhor lugar para histórico, anexos, protocolos e chamados da família — por link seguro.</p></div>
+      <div class="chan reveal"><div class="ic">✉️</div><div class="role">Fallback formal</div><h4>E-mail</h4><p>Registro formal quando necessário; toda interação vira ou localiza um protocolo.</p></div>
+      <div class="chan reveal"><div class="ic">📸</div><div class="role">Captura pública</div><h4>Instagram</h4><p>Capta a demanda pública e a leva para um atendimento privado com protocolo — sem exposição.</p></div>
+    </div>
+    <div class="reveal">
+      <div class="principle">
+        <div class="k">🎯</div>
+        <div><h4>Resolução ponta a ponta — não só “abrir o ticket”.</h4><p>Para o sócio, resolvido significa: boleto pago, acesso liberado, OS executada, reembolso processado, convidado na lista da portaria, inscrição confirmada, regra explicada e, quando cabível, causa raiz corrigida.</p></div>
+      </div>
+      <div class="principle">
+        <div class="k">🤝</div>
+        <div><h4>Atendimento assistido continua existindo.</h4><p>Para o sócio idoso, negociações financeiras ou dificuldade com o app, o atendente abre o mesmo protocolo em nome do associado. O canal muda; a rastreabilidade não.</p></div>
+      </div>
+      <div class="principle">
+        <div class="k">🛡️</div>
+        <div><h4>Camada de experiência + camada de governança.</h4><p>O ERP Clubes Associados segue como back-end de cadastro, financeiro, acesso e matrículas. O RJ-Service é a camada de triagem, SLA, histórico e medição — e cobra as áreas automaticamente, sem planilha manual.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CASOS DE USO ===== -->
+<section id="casos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">O coração do plano</span>
+      <h2>31 casos de uso — a sua área está aqui?</h2>
+      <p class="lead">Filtre por prioridade ou por bloco, busque por palavra-chave e clique em qualquer cartão para ver a lógica de resolução. <strong>Este é o melhor lugar para o Conselho conferir se nada ficou de fora.</strong></p>
+    </div>
+    <div class="controls reveal">
+      <div class="filterset" id="prfilter">
+        <button class="fbtn active" data-pr="all">Todos</button>
+        <button class="fbtn" data-pr="P0">P0 · Go-live</button>
+        <button class="fbtn" data-pr="P1">P1 · 90 dias</button>
+        <button class="fbtn" data-pr="P2">P2 · Consolidação</button>
+      </div>
+      <div class="search">🔎<input type="text" id="ucsearch" placeholder="Buscar por tema: boleto, portaria, academia, título…" /></div>
+    </div>
+    <div class="filterset reveal" id="clfilter" style="margin-bottom:8px;">
+      <button class="fbtn active" data-cl="all">Todos os blocos</button>
+      <button class="fbtn" data-cl="front">Front door</button>
+      <button class="fbtn" data-cl="fin">Financeiro &amp; self-service</button>
+      <button class="fbtn" data-cl="acesso">Acesso, reservas &amp; eventos</button>
+      <button class="fbtn" data-cl="esporte">Esporte, crianças &amp; bem-estar</button>
+      <button class="fbtn" data-cl="manut">Manutenção &amp; conveniências</button>
+      <button class="fbtn" data-cl="gov">Qualidade, disciplina &amp; interno</button>
+      <button class="fbtn" data-cl="soc">Sociedade, admissão &amp; externos</button>
+    </div>
+    <p class="uc-count" id="uccount"></p>
+    <div class="uc-grid" id="ucgrid"></div>
+  </div>
+</section>
+
+<!-- ===== PRIORIDADES ===== -->
+<section class="prioridades" id="prioridades">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Priorização</span>
+      <h2>O que entra primeiro — e por quê.</h2>
+      <p class="lead">O MVP ataca as maiores dores no go-live e amadurece em ondas. A sequência segue o volume real de demanda e o risco de cada fluxo.</p>
+    </div>
+    <div class="phases">
+      <div class="phase P0 reveal">
+        <div class="ph-tag">P0 · Obrigatório no go-live</div>
+        <h3>Resolver a dor central</h3>
+        <div class="when">11 casos de uso</div>
+        <p class="motivo">Canal único, financeiro recorrente, acesso, manutenção urgente, FAQ, atendimento assistido, deduplicação, SLA e cobrança automática das áreas.</p>
+        <div class="uc-mini"><span>UC-01</span><span>UC-02</span><span>UC-03</span><span>UC-06</span><span>UC-07</span><span>UC-12</span><span>UC-17</span><span>UC-22</span><span>UC-23</span><span>UC-24</span><span>UC-25</span></div>
+      </div>
+      <div class="phase P1 reveal">
+        <div class="ph-tag">P1 · Primeiros 90 dias</div>
+        <h3>Reduzir a demanda repetida</h3>
+        <div class="when">10 casos de uso</div>
+        <p class="motivo">Esportes, reservas, academia, redes sociais, TI mobile, movimentação societária, admissão de novos sócios e mobilidade/estacionamento.</p>
+        <div class="uc-mini"><span>UC-04</span><span>UC-08</span><span>UC-10</span><span>UC-13</span><span>UC-14</span><span>UC-18</span><span>UC-19</span><span>UC-26</span><span>UC-27</span><span>UC-30</span></div>
+      </div>
+      <div class="phase P2 reveal">
+        <div class="ph-tag">P2 · Consolidação</div>
+        <h3>Governança e ritos sensíveis</h3>
+        <div class="when">10 casos de uso</div>
+        <p class="motivo">Exige governança maior, integrações adicionais, envolvimento de terceiros/concessionários ou fluxos sensíveis (disciplina, crianças, externos).</p>
+        <div class="uc-mini"><span>UC-05</span><span>UC-09</span><span>UC-11</span><span>UC-15</span><span>UC-16</span><span>UC-20</span><span>UC-21</span><span>UC-28</span><span>UC-29</span><span>UC-31</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PLATAFORMAS ===== -->
+<section id="plataformas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">As plataformas</span>
+      <h2>Shortlist de mercado para a RFP.</h2>
+      <p class="lead">Dez plataformas foram avaliadas contra critérios eliminatórios (WhatsApp oficial, omnicanal, SLA, licença “light” barata e API aberta). Cinco entram na RFP. A decisão final deve vir de uma POC de cobertura, não da lista de recursos comerciais.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="cmp">
+        <thead>
+          <tr><th>Plataforma</th><th>Origem</th><th>Dados no BR</th><th>WhatsApp oficial</th><th>IA</th><th>Custo estimado/mês*</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="plat"><span class="badge-rank">1</span><a href="https://zenvia.com/" target="_blank" rel="noopener">Zenvia / Movidesk</a><small>Melhor equilíbrio local</small></td><td>Brasil 🇧🇷</td><td class="yes">Sim</td><td class="yes">✓</td><td class="yes">✓</td><td class="cost">R$ 1.900+</td></tr>
+          <tr><td class="plat"><span class="badge-rank">2</span><a href="https://www.zoho.com/desk/" target="_blank" rel="noopener">Zoho Desk</a><small>Melhor custo-benefício · DC em SP</small></td><td>Índia/EUA</td><td class="yes">Sim (SP)</td><td class="yes">✓</td><td class="yes">✓</td><td class="cost">~R$ 1.000</td></tr>
+          <tr><td class="plat"><span class="badge-rank">3</span><a href="https://www.octadesk.com/" target="_blank" rel="noopener">Octadesk</a><small>WhatsApp-first · usuários ilimitados</small></td><td>Brasil 🇧🇷</td><td class="yes">Sim</td><td class="yes">✓</td><td class="yes">✓</td><td class="cost">R$ 2.499+</td></tr>
+          <tr><td class="plat"><span class="badge-rank">4</span><a href="https://www.zendesk.com.br/" target="_blank" rel="noopener">Zendesk Suite</a><small>Benchmark global · light grátis</small></td><td>EUA</td><td>DPA</td><td class="yes">✓</td><td class="yes">✓</td><td class="cost">R$ 2.750+</td></tr>
+          <tr><td class="plat"><span class="badge-rank">5</span><a href="https://www.freshworks.com/freshdesk/omni/" target="_blank" rel="noopener">Freshdesk Omni</a><small>Custo intermediário · IA Freddy</small></td><td>EUA/Índia</td><td>DPA</td><td class="yes">✓</td><td class="yes">✓</td><td class="cost">R$ 2.440+</td></tr>
+          <tr style="background:var(--soft);"><td class="plat"><span class="badge-rank" style="background:#ede7fb;color:#7c3aed;">+</span><a href="https://www.chatwoot.com/" target="_blank" rel="noopener">Chatwoot + n8n</a><small>Stack técnico de baixo custo</small></td><td>Self-host 🇧🇷</td><td class="yes">Sim</td><td class="yes">✓</td><td>via n8n</td><td class="cost">~R$ 150</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="scroll-hint">→ Arraste a tabela para o lado para ver todas as colunas.</p>
+    <p class="src-note reveal">*Estimativa preliminar para ~6 usuários full + 9 colaboradores light e 800–1.200 tickets/mês (câmbio jun/2026; sem impostos, mensagens da Meta nem implantação). Nenhuma plataforma cobre sozinha os 31 fluxos sem configuração e integração com ERP, CMMS e controle de acesso.</p>
+  </div>
+</section>
+
+<!-- ===== DECISÃO ===== -->
+<section class="decisao" id="decisao">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">A decisão estratégica</span>
+      <h2>Dois caminhos válidos — quem vai manter o sistema?</h2>
+      <p class="lead">A escolha entre menor custo e menor dependência técnica deve refletir quem opera o sistema depois da implantação. Ambos passam por uma POC de 30 dias antes de qualquer contrato anual.</p>
+    </div>
+    <div class="paths">
+      <div class="path a reveal">
+        <div class="ptag">Caminho A</div>
+        <h3>SaaS puro</h3>
+        <div class="pcost">menor risco técnico <small>/ maior custo</small></div>
+        <ul class="plist">
+          <li class="pro"><span class="m">+</span><span>Shortlist <strong>Zoho Desk</strong> e <strong>Movidesk</strong>; fallback premium <strong>Zendesk Team</strong>.</span></li>
+          <li class="pro"><span class="m">+</span><span>Suporte do fornecedor, sem infraestrutura para o clube manter.</span></li>
+          <li class="pro"><span class="m">+</span><span>Roteamento, SLA e relatórios já embutidos no produto.</span></li>
+          <li class="con"><span class="m">!</span><span>Recursos avançados ficam nos planos mais caros; custo mensal maior.</span></li>
+        </ul>
+      </div>
+      <div class="path b reveal">
+        <div class="ribbon">Recomendado se houver TI interna</div>
+        <div class="ptag">Caminho B</div>
+        <h3>Service Desk + n8n</h3>
+        <div class="pcost">60–80% mais barato <small>/ exige manutenção técnica</small></div>
+        <ul class="plist">
+          <li class="pro"><span class="m">+</span><span><strong>n8n</strong> (€20/mês) como middleware de roteamento, SLA e integrações com ERP/CMMS.</span></li>
+          <li class="pro"><span class="m">+</span><span>Service Desk em plano básico: <strong>Zoho Standard</strong> ou <strong>Chatwoot</strong>. Self-hosted ~R$ 150/mês.</span></li>
+          <li class="pro"><span class="m">+</span><span>Lógica de roteamento explícita, versionável e auditável.</span></li>
+          <li class="con"><span class="m">!</span><span>Depende de perfil técnico para manter os workflows — atenção ao risco de sucessão.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PRÓXIMOS PASSOS ===== -->
+<section class="proximos" id="proximos">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Próximos passos</span>
+      <h2>RFP curta + POC de 30 dias.</h2>
+      <p class="lead">A POC precisa provar workflow, colaborador light, checklist, deduplicação e integração — não apenas o canal de WhatsApp.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="sn">1</div><h4>RFP para 5 fornecedores</h4><p>Zenvia/Movidesk, Zoho Desk, Octadesk, Zendesk e Freshdesk, com perguntas firmes sobre WhatsApp, light users, SLA por área+sede, API para ERP/CMMS, LGPD e exportação.</p></div>
+      <div class="step reveal"><div class="sn">2</div><h4>POC de 30 dias</h4><p>Testar 8 fluxos reais cobrindo P0 e os casos que mudam a decisão, com critérios objetivos de aprovação.</p></div>
+      <div class="step reveal"><div class="sn">3</div><h4>Decisão + v2 com IA</h4><p>Escolher pela cobertura operacional. Avaliar uma camada de IA (deflexão de FAQ) após 6 meses com dados reais.</p></div>
+    </div>
+    <h3 style="color:#fff; font-size:1.3rem; margin-bottom:18px;">Os 8 fluxos da POC</h3>
+    <div class="poc-grid reveal">
+      <div class="poc"><span class="chk">1</span><span>Segunda via de boleto pelo WhatsApp, com consulta ao ERP e fallback humano.</span></div>
+      <div class="poc"><span class="chk">2</span><span>Falha de catraca/acesso com portaria, secretaria e financeiro no mesmo protocolo.</span></div>
+      <div class="poc"><span class="chk">3</span><span>Manutenção emergencial com foto, sede/local, criticidade e OS no CMMS.</span></div>
+      <div class="poc"><span class="chk">4</span><span>Reclamação no Instagram convertida em ticket privado com link da postagem.</span></div>
+      <div class="poc"><span class="chk">5</span><span>Duplicidade: mesma demanda por WhatsApp, e-mail e presencial, com sugestão de mescla.</span></div>
+      <div class="poc"><span class="chk">6</span><span>Movimentação societária com checklist, aprovação e status para o associado.</span></div>
+      <div class="poc"><span class="chk">7</span><span>Lead de novo sócio pedindo joia/título/plano familiar, com encaminhamento comercial.</span></div>
+      <div class="poc"><span class="chk">8</span><span>Objeto perdido ou demanda de concessionário com colaborador light e controle de permissão.</span></div>
+    </div>
+    <p style="color:#bfe6cd; font-size:.92rem; margin-top:22px;"><strong style="color:#fff;">Critérios de aprovação:</strong> chamado aberto em menos de 60 s; ticket na fila certa em ≥ 80% dos testes; colaborador light contribui sem ver dados indevidos; SLA, cobrança automática e escalonamento por área/sede; deduplicação confiável; checklist societário sem gambiarra; CSAT no encerramento; API/exportação funcionando.</p>
+  </div>
+</section>
+
+<!-- ===== MÉTRICAS ===== -->
+<section class="metricas" id="metricas">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Como saberemos que deu certo</span>
+      <h2>Métricas de sucesso.</h2>
+      <p class="lead">O sistema transforma cada interação em dado acionável: onde ocorre, quem resolve, quanto demora e qual área está sobrecarregada.</p>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi reveal"><div class="ic">📍</div><p>% de demandas no canal oficial vs. canais paralelos</p></div>
+      <div class="kpi reveal"><div class="ic">⏱️</div><p>Tempo médio de 1ª resposta e de resolução por área/sede</p></div>
+      <div class="kpi reveal"><div class="ic">🔀</div><p>% de demandas duplicadas detectadas e mescladas</p></div>
+      <div class="kpi reveal"><div class="ic">🤖</div><p>% de tickets resolvidos por self-service</p></div>
+      <div class="kpi reveal"><div class="ic">🚨</div><p>Tickets vencidos e ranking de áreas com SLA estourado</p></div>
+      <div class="kpi reveal"><div class="ic">😀</div><p>CSAT pós-atendimento por área, sede e canal</p></div>
+      <div class="kpi reveal"><div class="ic">🔧</div><p>Top 10 causas de manutenção por sede e reincidência</p></div>
+      <div class="kpi reveal"><div class="ic">🎫</div><p>Leads de novos sócios recebidos, convertidos e perdidos</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== REVISÃO CTA ===== -->
+<section class="revisao" id="revisao">
+  <div class="wrap">
+    <div class="cta reveal">
+      <span class="eyebrow" style="justify-content:center;">Sua revisão</span>
+      <h2>As ideias do Conselho estão cobertas?</h2>
+      <p>Este material existe para ser desafiado. Antes de seguirmos para a RFP, queremos garantir que cada visão do Conselho Executivo esteja representada no plano.</p>
+      <div class="qcards">
+        <div class="qcard"><div class="qn">1</div><p>Sua área ou demanda está coberta por algum dos <strong>31 casos de uso</strong>? Falta algum fluxo, persona ou risco?</p></div>
+        <div class="qcard"><div class="qn">2</div><p>Você concorda com a <strong>priorização</strong> P0 → P1 → P2 e com o que entra no go-live?</p></div>
+        <div class="qcard"><div class="qn">3</div><p>A <strong>shortlist de plataformas</strong> e os dois caminhos de decisão fazem sentido para o clube?</p></div>
+      </div>
+      <p class="cta-how">Envie seus comentários ao Fabrício (VP Administrativo-Financeiro) ou traga-os para a próxima reunião do Conselho. Tudo o que aparecer aqui pode virar um novo caso de uso ou ajustar a prioridade.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>RJ-Service</h4>
+        <p style="color:#9ec8ad; max-width:42ch;">O novo sistema de atendimento do Recreio da Juventude: um canal oficial, um protocolo, um prazo e uma resolução — escondendo do associado a complexidade interna do clube.</p>
+      </div>
+      <div>
+        <h4>Documentos de origem</h4>
+        <ul>
+          <li>Mapa de casos de uso (31 UCs)</li>
+          <li>Comparativo de plataformas omnichannel</li>
+          <li>Plataformas candidatas &amp; critérios</li>
+          <li>Base SAA classificada · Relatórios 2025</li>
+        </ul>
+      </div>
+      <div>
+        <h4>Links</h4>
+        <ul>
+          <li><a href="https://www.recreiodajuventude.com.br/" target="_blank" rel="noopener">Site do clube</a></li>
+          <li><a href="https://www.recreiodajuventude.com.br/perguntas-frequentes/financeiro" target="_blank" rel="noopener">FAQ financeiro</a></li>
+          <li><a href="https://www.recreiodajuventude.com.br/perguntas-frequentes/acessos-de-visitantes" target="_blank" rel="noopener">FAQ de acessos</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>Recreio da Juventude · Conselho Executivo · documento de trabalho, jun/2026</span>
+      <span>Material para revisão — não é um compromisso comercial.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const USE_CASES = [
+  {id:"01",pr:"P0",cl:"front",t:"Ponto único de contato para qualquer demanda",p:"Sócio, dependente ou responsável com qualquer demanda",d:"Caso de uso estruturante — sem ele, todos os outros seguem fragmentados. O sistema sempre cria ou localiza um ticket, mesmo quando a entrada vem por mensagem informal, WhatsApp individual, Jivo, SAC, ligação ou balcão. Resolução: identificar o associado, classificar área/sede/urgência, informar o SLA, rotear, atualizar o status e encerrar com confirmação e CSAT."},
+  {id:"02",pr:"P0",cl:"fin",t:"Segunda via de boleto e regularização rápida",p:"Sócio que precisa pagar ou regularizar uma mensalidade",d:"Não deveria consumir atendente na maioria dos casos — boletos e formas de pagamento são as dúvidas mais recorrentes do FAQ. Self-service 24h: consultar o ERP, gerar o boleto atualizado, enviar instruções e registrar a entrega, com fallback para o financeiro se houver erro ou restrição."},
+  {id:"03",pr:"P0",cl:"fin",t:"Contestação de cobrança, extrato e composição da mensalidade",p:"Sócio que não entende um valor cobrado",d:"Diferente da segunda via: exige histórico, anexos, decisão e eventual estorno — não é FAQ simples. Resolução: anexar fatura/extrato, consultar o ERP, classificar o item contestado, aprovar correção/estorno quando cabível e informar a decisão formalmente, sem repetir a história para várias pessoas."},
+  {id:"04",pr:"P1",cl:"fin",t:"Cancelamento de serviço, modalidade ou atividade paga",p:"Sócio que quer cancelar um serviço ou modalidade paga",d:"Cancelamento cruza atendimento, área técnica e financeiro — se o sócio é mandado de um setor para outro, a experiência deteriora rápido. Resolução: validar titularidade, explicar a regra do mês, registrar a data efetiva, atualizar o ERP, notificar a coordenação e confirmar por WhatsApp/app. Cancelamento fora de prazo gera resposta clara, nunca silêncio."},
+  {id:"05",pr:"P2",cl:"soc",t:"Atualização cadastral, dependentes e documentos",p:"Sócio que precisa atualizar cadastro, dependentes ou documentos",d:"Cadastro errado causa problema em cadeia: boleto não recebido, convidado barrado, dependente sem acesso, comunicação perdida. Resolução: coletar dados/documentos, validar identidade, atualizar o ERP ou abrir tarefa para a secretaria e registrar o comprovante. Exige controle LGPD, anexos protegidos e trilha de auditoria."},
+  {id:"06",pr:"P0",cl:"acesso",t:"Falha de facial, digital, catraca ou acesso",p:"Associado cuja facial, digital ou catraca não libera",d:"Acesso é momento de alta sensibilidade — a resolução precisa acontecer na portaria, sem constrangimento e sem perder a atividade. Resolução: a portaria abre um fluxo rápido, valida a identidade, consulta a situação financeira/cadastral, libera exceção quando permitido e agenda recadastro se necessário."},
+  {id:"07",pr:"P0",cl:"acesso",t:"Acesso de visitantes, convidados, babás e acompanhantes",p:"Sócio que precisa cadastrar visitantes, babás ou convidados",d:"O clube exige antecedência para listas e documentos de babás/acompanhantes — ideal para automação guiada com prazo e checklist. Resolução: coletar lista/documentos, validar prazo, regra e capacidade, integrar com a portaria, calcular taxas se houver e confirmar a liberação antes da chegada."},
+  {id:"08",pr:"P1",cl:"acesso",t:"Reserva de recantos, quiosques, quadras e espaços",p:"Sócio que quer reservar recanto, quadra ou espaço",d:"Reservas cruzam locações, financeiro, portaria, manutenção e regras. O ticket carrega data, unidade, espaço e responsável. Resolução: consultar disponibilidade, confirmar a reserva, gerar cobrança, orientar regras, integrar a lista de convidados e abrir vistoria/manutenção se houver problema no espaço."},
+  {id:"09",pr:"P2",cl:"acesso",t:"Compra de ingressos e inscrição em eventos",p:"Sócio que quer comprar ingresso ou confirmar presença em evento",d:"Eventos geram picos. Se o atendimento não tratar lote, pagamento, elegibilidade e acesso, a fila vai para o Instagram, grupos e portaria. Resolução: validar categoria/dependente, vender/reservar o ingresso, enviar QR code/comprovante e sincronizar com a portaria."},
+  {id:"10",pr:"P1",cl:"esporte",t:"Matrícula, rematrícula e lista de espera em esportes",p:"Atleta ou responsável que quer matricular-se numa modalidade",d:"Com 4.202 inscrições esportivas, é uma fila central. Lista de espera sem visibilidade gera ansiedade e contatos repetidos. Resolução: validar idade/categoria/pré-requisitos, consultar vagas, registrar interesse, confirmar a matrícula, atualizar a cobrança e notificar o coordenador e o responsável — sem falar com secretaria, professor e coordenador separadamente."},
+  {id:"11",pr:"P2",cl:"esporte",t:"Suporte a atletas de rendimento, master e paralímpico",p:"Atleta de rendimento, master ou paralímpico (ou sua família)",d:"Demandas de rendimento têm prazo e reputação envolvidos. Um grupo informal resolve rápido, mas não gera histórico nem governança. Resolução: coletar a solicitação/documentos, classificar o tipo de apoio, aprovar o responsável, registrar a decisão e manter histórico por atleta."},
+  {id:"12",pr:"P0",cl:"manut",t:"Manutenção emergencial reportada pelo associado",p:"Associado que encontra um risco ou avaria na estrutura",d:"Vazamento, risco elétrico, vidro quebrado, piso escorregadio: não pode seguir SLA administrativo comum. É preciso separar “conter o risco” de “corrigir em definitivo”. Resolução: capturar foto/local, classificar o risco, notificar manutenção/segurança, registrar a contenção e criar OS no CMMS. Triagem em até 15 minutos."},
+  {id:"13",pr:"P1",cl:"manut",t:"Manutenção não emergencial e melhorias de infraestrutura",p:"Sócio frequente que percebe um problema recorrente",d:"Nem toda demanda vira OS imediata, mas toda demanda vira dado — é o elo entre atendimento e priorização patrimonial. Resolução: registrar local/categoria, agrupar reincidências, criar OS ou backlog de melhoria, informar previsão ou justificativa e alimentar o dashboard por sede."},
+  {id:"14",pr:"P1",cl:"esporte",t:"Academia, Recreio Life, SPA, beleza/saúde ou bem-estar",p:"Usuário de academia, Recreio Life, SPA ou bem-estar",d:"Academias tiveram 3.886 inscritos — o volume justifica fila própria com SLA menor para problemas de equipamento/segurança. Resolução: identificar a unidade/serviço, diferenciar manutenção de atendimento comercial, acionar o responsável, registrar a solução e comunicar o usuário."},
+  {id:"15",pr:"P2",cl:"gov",t:"Reclame aqui interno: qualidade, conduta e convivência",p:"Quem presencia má conduta, conflito ou quer dar feedback",d:"Separa feedback comum de caso sensível. Reclamação disciplinar exige confidencialidade, acesso restrito e rito claro; sugestões e elogios viram dado de melhoria, não somem em caixa genérica. Risco: notas internas jamais podem vazar ao associado ou ao acusado."},
+  {id:"16",pr:"P2",cl:"esporte",t:"Crianças, educação, Escola de Artes, Recreio LAB e HighLab",p:"Pai, mãe ou responsável por criança/dependente",d:"Demandas infantis combinam urgência emocional, LGPD, autorizações e múltiplas áreas — a unidade do histórico por dependente é essencial. Resolução: identificar o dependente, validar o responsável, classificar o assunto, envolver a área pedagógica/arte/esporte/financeiro e registrar retorno e anexos."},
+  {id:"17",pr:"P0",cl:"fin",t:"Dúvidas de regras, horários e base de conhecimento",p:"Sócio com dúvida sobre regras, horários ou normas",d:"Grande parte deve ser resolvida antes de virar ticket — mas o bot/base sempre deve oferecer “abrir chamado” quando a resposta não resolver. Resolução: sugerir o artigo oficial, confirmar se resolveu, abrir ticket se necessário e medir as perguntas sem resposta para atualizar a base. Automação alta."},
+  {id:"18",pr:"P1",cl:"front",t:"Instagram, comentários públicos e redes sociais",p:"Associado que reclama ou pede ajuda por Instagram/Facebook",d:"Redes sociais são canal de reputação, não backoffice. Resolução: responder publicamente com orientação segura quando cabível, mover para DM/WhatsApp, criar ticket com o link da postagem, encaminhar à área e retornar ao associado em privado — sem perder o contexto original."},
+  {id:"19",pr:"P1",cl:"fin",t:"TI para associados: app, login, Wi-Fi e pagamentos digitais",p:"Sócio com problema no app, login, Wi-Fi ou pagamento digital",d:"Se o canal primário é mobile, falhas digitais precisam de suporte próprio — senão o próprio sistema de atendimento vira ponto de frustração. Resolução: coletar aparelho/print/sistema, validar cadastro, acionar TI/fornecedor, informar workaround e registrar incidentes recorrentes."},
+  {id:"20",pr:"P2",cl:"gov",t:"Solicitações internas de colaboradores e prestadores",p:"Colaborador, professor ou prestador com demanda interna",d:"O sistema separa o portal externo de associados do portal interno de operação — misturar filas vaza informação e distorce SLAs. Resolução: identificar o perfil interno, classificar a área, rotear para DHO/TI/patrimônio/almoxarifado e registrar aprovação quando houver custo."},
+  {id:"21",pr:"P2",cl:"acesso",t:"Incidente operacional durante evento ou pico de movimento",p:"Gestor, portaria ou associado durante evento/pico",d:"Eventos geram demandas simultâneas e públicas — tratar cada mensagem como ticket isolado perde a visão de incidente. Resolução: abrir um incidente-mãe, vincular os tickets dos associados, acionar responsáveis, enviar comunicados por canal oficial e registrar o pós-morte e ações preventivas."},
+  {id:"22",pr:"P0",cl:"gov",t:"Ouvidoria executiva e escalonamento de SLA",p:"Associado com demanda não resolvida ou gestor do clube",d:"Sem escalonamento, o SLA vira número decorativo. A diretoria precisa ver poucos casos — mas os casos certos. Resolução: detectar atraso/criticidade, notificar o gestor com histórico completo, registrar a decisão, replanejar o prazo quando necessário e fechar a causa raiz."},
+  {id:"23",pr:"P0",cl:"front",t:"Atendimento assistido presencial e telefônico",p:"Sócio sênior ou em negociação que procura balcão/telefone",d:"Presencial e telefone seguem importantes para idosos, negociações financeiras e suporte ao app. O objetivo não é forçar o digital — é garantir que todo canal alimente a mesma fila. O atendente abre ou atualiza o protocolo em nome do associado e entrega o número por SMS/WhatsApp/e-mail."},
+  {id:"24",pr:"P0",cl:"front",t:"Deduplicação e migração de canais legados",p:"Atendente diante do mesmo caso em vários canais",d:"O fluxo SAC → Jivo → WhatsApp → telefone → presencial mostra que a duplicidade é uma das maiores fontes de custo e de percepção de demora. Resolução: detectar duplicidade por associado, telefone, e-mail, matrícula, assunto e período; sugerir o ticket existente; manter uma única linha do tempo; e fechar duplicatas com motivo auditável."},
+  {id:"25",pr:"P0",cl:"gov",t:"Encaminhamento com SLA e cobrança automática das áreas",p:"Atendente que depende de outra área para resolver",d:"Transforma “encaminhar e cobrar” em fluxo mensurável. Resolução: selecionar área e responsável, aplicar SLA por tipo de demanda, notificar a área, permitir comentário interno, cobrar automaticamente antes/depois do vencimento, aprovar a resposta quando necessário e medir o tempo por etapa — sem acompanhamento manual por fora do sistema."},
+  {id:"26",pr:"P1",cl:"soc",t:"Movimentação societária e ciclo de vida do título",p:"Sócio/secretaria tratando o ciclo de vida do título",d:"Abertura aos 18, renovação de ausente/estudante, transferência, compra/venda de joia, dissolução, unificação, readmissão, inativação, falecimento: é frente própria, com rito, documentos e efeitos em acesso e cobrança. Resolução: checklist documental, cálculo de impacto financeiro, aprovação, atualização de ERP/cadastro/acesso e comunicação padronizada."},
+  {id:"27",pr:"P1",cl:"soc",t:"Prospecção e admissão de novos associados",p:"Interessado em se associar ou ampliar para plano familiar",d:"Alto volume de interesse em associar-se, joia, título familiar e valores — não pode se misturar com cadastro de sócio ativo nem com movimentação já formalizada. Resolução: capturar o lead, informar benefícios e custos com simulação, agendar visita, coletar documentos iniciais e converter para o processo formal (UC-26) quando avançar."},
+  {id:"28",pr:"P2",cl:"soc",t:"Trabalhe conosco, fornecedores, parcerias e patrocínios",p:"Candidato, fornecedor, parceiro ou patrocinador externo",d:"Currículos e propostas exigem tratamento LGPD, prazo e área diferentes do atendimento ao sócio — misturar com o SAC distorce o SLA e cria risco de dados pessoais sem política de retenção. Resolução: classificar (vaga/fornecedor/patrocínio/parceria/proposta), coletar anexos com consentimento e rotear para DHO/suprimentos/marketing/comercial."},
+  {id:"29",pr:"P2",cl:"manut",t:"Conveniência, consumo, biblioteca e achados e perdidos",p:"Quem usa restaurante, bar, biblioteca ou perdeu um objeto",d:"A experiência do clube não se limita a esporte, financeiro e manutenção: gastronomia, biblioteca, coworking e achados e perdidos precisam de fila ou responsável claro, mesmo quando operados por concessionário. Resolução: identificar o serviço, registrar a solicitação, rotear ao responsável interno/concessionário e confirmar o retorno ao associado."},
+  {id:"30",pr:"P1",cl:"manut",t:"Mobilidade, estacionamento e circulação interna",p:"Quem tem problema de estacionamento ou circulação interna",d:"Estacionamento e circulação aparecem em reclamações, sugestões e riscos de segurança — parte vira manutenção, parte vira regra, parte vira investimento. Resolução: coletar sede/local, tipo de veículo, risco e foto; acionar segurança/portaria/manutenção; e classificar se é regra operacional, OS ou projeto, acompanhando a reincidência."},
+  {id:"31",pr:"P2",cl:"soc",t:"Benefícios, convênios, Clube na Mala e cartas",p:"Sócio que quer carta, convênio ou Clube na Mala",d:"Pedidos pequenos, mas com prazo claro (viagem, fim de semana) e alto risco de frustração se atrasarem. Resolução: validar adimplência/categoria, coletar destino/período/pessoas, gerar a carta ou orientação padronizada, registrar o envio e arquivar o comprovante."}
+];
+
+const CL_LABELS = {front:"Front door", fin:"Financeiro", acesso:"Acesso/eventos", esporte:"Esporte/bem-estar", manut:"Manutenção", gov:"Governança", soc:"Sociedade"};
+
+let curPr = "all", curCl = "all", curQ = "";
+const grid = document.getElementById("ucgrid");
+const countEl = document.getElementById("uccount");
+
+function render(){
+  const q = curQ.trim().toLowerCase();
+  const items = USE_CASES.filter(u =>
+    (curPr==="all" || u.pr===curPr) &&
+    (curCl==="all" || u.cl===curCl) &&
+    (q==="" || ("uc-"+u.id+" "+u.t+" "+u.p+" "+u.d).toLowerCase().includes(q))
+  );
+  grid.innerHTML = items.map(u => `
+    <article class="uc" data-id="${u.id}">
+      <div class="uc-head" role="button" tabindex="0" aria-expanded="false">
+        <span class="uc-code" data-pr="${u.pr}">UC-${u.id}</span>
+        <div class="uc-main">
+          <div class="uc-title">${u.t}</div>
+          <div class="uc-persona">${u.p}</div>
+          <div class="uc-tags">
+            <span class="tg pr ${u.pr}">${u.pr}</span>
+            <span class="tg cl">${CL_LABELS[u.cl]}</span>
+          </div>
+        </div>
+        <span class="uc-toggle">+</span>
+      </div>
+      <div class="uc-body"><div class="uc-body-inner"><p>${u.d}</p></div></div>
+    </article>`).join("");
+  countEl.textContent = `Mostrando ${items.length} de ${USE_CASES.length} casos de uso` +
+    (curPr!=="all" ? ` · ${curPr}` : "") + (curCl!=="all" ? ` · ${CL_LABELS[curCl]}` : "") + (q ? ` · “${curQ}”` : "");
+  bindCards();
+}
+
+function bindCards(){
+  grid.querySelectorAll(".uc-head").forEach(h => {
+    const toggle = () => {
+      const uc = h.closest(".uc");
+      const body = uc.querySelector(".uc-body");
+      const open = uc.classList.toggle("open");
+      h.setAttribute("aria-expanded", open ? "true" : "false");
+      body.style.maxHeight = open ? body.scrollHeight + "px" : "0";
+    };
+    h.addEventListener("click", toggle);
+    h.addEventListener("keydown", e => { if(e.key==="Enter"||e.key===" "){ e.preventDefault(); toggle(); } });
+  });
+}
+
+document.querySelectorAll("#prfilter .fbtn").forEach(b =>
+  b.addEventListener("click", () => {
+    document.querySelectorAll("#prfilter .fbtn").forEach(x => x.classList.remove("active"));
+    b.classList.add("active"); curPr = b.dataset.pr; render();
+  }));
+document.querySelectorAll("#clfilter .fbtn").forEach(b =>
+  b.addEventListener("click", () => {
+    document.querySelectorAll("#clfilter .fbtn").forEach(x => x.classList.remove("active"));
+    b.classList.add("active"); curCl = b.dataset.cl; render();
+  }));
+document.getElementById("ucsearch").addEventListener("input", e => { curQ = e.target.value; render(); });
+render();
+
+/* ===== Scroll reveal ===== */
+const ro = new IntersectionObserver((entries) => {
+  entries.forEach(en => { if(en.isIntersecting){ en.target.classList.add("in"); ro.unobserve(en.target); } });
+}, {threshold:.12});
+document.querySelectorAll(".reveal").forEach(el => ro.observe(el));
+
+/* ===== Animated bars ===== */
+const bo = new IntersectionObserver((entries) => {
+  entries.forEach(en => {
+    if(en.isIntersecting){ en.target.style.width = en.target.dataset.pct + "%"; bo.unobserve(en.target); }
+  });
+}, {threshold:.4});
+document.querySelectorAll(".barfill").forEach(el => bo.observe(el));
+
+/* ===== Count-up ===== */
+function fmt(n){ return n.toLocaleString("pt-BR"); }
+const co = new IntersectionObserver((entries) => {
+  entries.forEach(en => {
+    if(!en.isIntersecting) return;
+    const el = en.target, target = +el.dataset.count, dur = 1300, start = performance.now();
+    function tick(t){
+      const p = Math.min((t-start)/dur, 1);
+      const eased = 1 - Math.pow(1-p, 3);
+      el.textContent = fmt(Math.round(target*eased));
+      if(p<1) requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick); co.unobserve(el);
+  });
+}, {threshold:.5});
+document.querySelectorAll("[data-count]").forEach(el => co.observe(el));
+
+/* ===== Nav: shadow + active link ===== */
+const nav = document.getElementById("nav");
+const sections = [...document.querySelectorAll("section[id]")];
+const links = [...document.querySelectorAll("#navlinks a")];
+window.addEventListener("scroll", () => {
+  nav.classList.toggle("scrolled", window.scrollY > 20);
+  let cur = "";
+  const y = window.scrollY + 90;
+  for(const s of sections){ if(s.offsetTop <= y) cur = s.id; }
+  links.forEach(a => a.classList.toggle("active", a.getAttribute("href") === "#"+cur));
+}, {passive:true});
+</script>
+</body>
+</html>
