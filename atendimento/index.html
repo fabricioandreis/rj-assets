@@ -280,6 +280,72 @@
   .scroll-hint{font-size:.8rem; color:var(--muted); margin-top:10px; display:none;}
   @media(max-width:760px){ .scroll-hint{display:block;} }
 
+  /* ===== Plataformas — critérios e cartões detalhados ===== */
+  .plat-crit{display:grid; grid-template-columns:repeat(5,1fr); gap:12px; margin:30px 0 10px;}
+  @media(max-width:860px){ .plat-crit{grid-template-columns:repeat(2,1fr);} }
+  @media(max-width:480px){ .plat-crit{grid-template-columns:1fr;} }
+  .crit{background:#fff; border:1px solid var(--line); border-left:4px solid var(--g500); border-radius:var(--r-md); padding:15px 16px; box-shadow:var(--shadow-sm);}
+  .crit .ck{font-family:var(--serif); font-weight:800; font-size:.8rem; letter-spacing:.04em; color:var(--g700);}
+  .crit p{font-size:.86rem; margin:6px 0 0; color:var(--ink2); line-height:1.4;}
+
+  .tier-head{display:flex; flex-wrap:wrap; align-items:baseline; gap:12px; margin:56px 0 4px;}
+  .tier-head h3{font-size:clamp(1.4rem,3vw,1.7rem); font-weight:800;}
+  .tier-head .tier-tag{font-family:var(--serif); font-weight:700; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; padding:5px 12px; border-radius:var(--r-pill);}
+  .tier-tag.short{background:var(--g50); color:var(--g700);}
+  .tier-tag.long{background:#eaf4fa; color:#0e7490;}
+  .tier-tag.comp{background:#f3edfc; color:#7c3aed;}
+  .tier-head p{flex-basis:100%; font-size:.96rem; color:var(--ink2); margin:6px 0 0; max-width:80ch;}
+
+  .plat-grid{display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-top:24px;}
+  @media(max-width:900px){ .plat-grid{grid-template-columns:1fr;} }
+
+  .platc{border:1px solid var(--line); border-radius:var(--r-lg); background:#fff; box-shadow:var(--shadow-sm); padding:24px; display:flex; flex-direction:column; transition:box-shadow .2s, border-color .2s;}
+  .platc:hover{border-color:var(--g100); box-shadow:var(--shadow-md);}
+  .platc.elim{border-style:dashed; background:var(--soft);}
+  .platc-top{display:flex; gap:14px; align-items:flex-start;}
+  .platc-rank{flex-shrink:0; width:36px; height:36px; border-radius:50%; display:grid; place-items:center; background:linear-gradient(145deg,var(--g500),var(--g900)); color:#fff; font-family:var(--serif); font-weight:800; font-size:1rem;}
+  .platc-rank.alt{background:#eaf4fa; color:#0e7490;}
+  .platc-rank.x{background:#f3edfc; color:#7c3aed;}
+  .platc-id{flex:1; min-width:0;}
+  .platc-name{font-family:var(--serif); font-weight:800; font-size:1.2rem; color:var(--ink); line-height:1.2;}
+  .platc-name a{color:inherit;}
+  .platc-meta{font-size:.84rem; color:var(--muted); margin-top:4px;}
+  .platc-fit{display:inline-block; font-family:var(--serif); font-weight:700; font-size:.74rem; margin-top:9px; padding:4px 11px; border-radius:var(--r-pill); background:var(--g50); color:var(--g700); line-height:1.3;}
+  .platc-cost{margin-top:15px; font-family:var(--serif); font-weight:800; font-size:1.14rem; color:var(--g700); line-height:1.2;}
+  .platc-cost small{display:block; font-family:var(--body); font-weight:400; font-size:.8rem; color:var(--muted); margin-top:3px; line-height:1.4;}
+
+  .platc-scores{display:flex; gap:8px; margin-top:15px; flex-wrap:wrap;}
+  .score{flex:1; min-width:76px; background:var(--soft); border-radius:var(--r-md); padding:10px 8px; text-align:center;}
+  .score .sv{font-family:var(--serif); font-weight:800; font-size:1.16rem; color:var(--ink); line-height:1;}
+  .score .sl{font-size:.66rem; color:var(--muted); margin-top:5px; letter-spacing:.04em; text-transform:uppercase;}
+  .score.total{background:var(--g900);}
+  .score.total .sv{color:#fff;} .score.total .sl{color:#a9d8bd;}
+
+  .platc-pc{display:grid; grid-template-columns:1fr 1fr; gap:14px 20px; margin-top:18px;}
+  @media(max-width:560px){ .platc-pc{grid-template-columns:1fr;} }
+  .pc-col h5{font-family:var(--serif); font-weight:800; font-size:.76rem; letter-spacing:.05em; text-transform:uppercase; margin-bottom:9px;}
+  .pc-col.pros h5{color:var(--g500);}
+  .pc-col.cons h5{color:var(--warn);}
+  .pc-col ul{list-style:none; padding:0; margin:0;}
+  .pc-col li{font-size:.88rem; line-height:1.46; margin-bottom:9px; display:flex; gap:8px; align-items:flex-start; color:var(--ink2);}
+  .pc-col li .mk{flex-shrink:0; font-weight:800;}
+  .pc-col.pros li .mk{color:var(--g500);}
+  .pc-col.cons li .mk{color:var(--warn);}
+
+  .platc-toggle{margin-top:16px; align-self:flex-start; font-family:var(--serif); font-weight:700; font-size:.84rem; color:var(--g700); background:none; border:none; cursor:pointer; padding:6px 0;}
+  .platc-toggle:hover{text-decoration:underline;}
+  .platc-extra{max-height:0; overflow:hidden; transition:max-height .35s ease;}
+  .platc-extra-inner{padding-top:16px; margin-top:8px; border-top:1px dashed var(--line); display:grid; gap:16px;}
+  .extra-block h5{font-family:var(--serif); font-weight:800; font-size:.76rem; letter-spacing:.05em; text-transform:uppercase; color:var(--ink); margin-bottom:9px;}
+  .extra-block p{font-size:.86rem; color:var(--ink2); margin:0; line-height:1.5;}
+  .extra-block ul{margin:0; padding:0; list-style:none; display:grid; gap:6px;}
+  .extra-block ul li{font-size:.86rem; color:var(--ink2); line-height:1.45; padding-left:14px; position:relative;}
+  .extra-block ul li::before{content:"·"; position:absolute; left:2px; color:var(--g500); font-weight:800;}
+  .elim-grid{display:grid; gap:8px;}
+  .elim-row{display:grid; grid-template-columns:42px 1fr; gap:10px; align-items:start; font-size:.85rem; color:var(--ink2); line-height:1.4;}
+  .elim-row .es{font-family:var(--serif); font-weight:800; white-space:nowrap;}
+  .es.ok{color:var(--g500);} .es.warn{color:var(--warn);} .es.no{color:var(--danger);}
+
   /* ===== Decisão ===== */
   .decisao{background:linear-gradient(180deg,var(--g50),#fff);}
   .paths{display:grid; grid-template-columns:1fr 1fr; gap:22px;}
@@ -583,8 +649,16 @@
     <div class="section-head reveal">
       <span class="eyebrow">As plataformas</span>
       <h2>Shortlist de mercado para a RFP.</h2>
-      <p class="lead">Dez plataformas foram avaliadas contra critérios eliminatórios (WhatsApp oficial, omnicanal, SLA, licença “light” barata e API aberta). Cinco entram na RFP. A decisão final deve vir de uma POC de cobertura, não da lista de recursos comerciais.</p>
+      <p class="lead">Quinze plataformas foram avaliadas a fundo contra <strong>5 critérios eliminatórios</strong> (WhatsApp oficial, omnicanal, SLA, licença “light” barata e API aberta) e <strong>14 requisitos não funcionais</strong>. Cinco entram na shortlist da RFP — mas a decisão final deve vir de uma POC de cobertura, não da lista de recursos comerciais. Abaixo, os pontos fortes e os pontos de atenção de <strong>cada ferramenta</strong>, para embasar a escolha do Conselho.</p>
     </div>
+    <div class="plat-crit reveal">
+      <div class="crit"><div class="ck">E1 · WhatsApp</div><p>WhatsApp Business API nativa ou via BSP homologado.</p></div>
+      <div class="crit"><div class="ck">E2 · Omnicanal</div><p>WhatsApp + e-mail + portal em tickets unificados.</p></div>
+      <div class="crit"><div class="ck">E3 · SLA</div><p>Metas por fila, alertas e escalonamento automático.</p></div>
+      <div class="crit"><div class="ck">E4 · Light</div><p>Licença de colaborador eventual barata ou gratuita.</p></div>
+      <div class="crit"><div class="ck">E5 · API</div><p>REST/webhooks p/ app mobile, ERP e OS no CMMS.</p></div>
+    </div>
+    <p class="src-note reveal">Além dos 5 critérios eliminatórios, a RFP exige evidência de <strong>14 requisitos não funcionais</strong> (RNF-01 a RNF-14): IA, web responsiva interna, relatórios/API, LGPD, permissões e auditoria, continuidade, performance mobile, escalabilidade, configuração sem desenvolvimento, governança da base de conhecimento, observabilidade, portabilidade, custo previsível e usabilidade/treinamento. Os <strong>7 primeiros são obrigatórios na POC</strong>.</p>
     <div class="table-wrap reveal">
       <table class="cmp">
         <thead>
@@ -592,16 +666,66 @@
         </thead>
         <tbody>
           <tr><td class="plat"><span class="badge-rank">1</span><a href="https://zenvia.com/" target="_blank" rel="noopener">Zenvia / Movidesk</a><small>Melhor equilíbrio local</small></td><td>Brasil 🇧🇷</td><td class="yes">Sim</td><td class="yes">✓</td><td class="yes">✓</td><td class="cost">R$ 1.900+</td></tr>
-          <tr><td class="plat"><span class="badge-rank">2</span><a href="https://www.zoho.com/desk/" target="_blank" rel="noopener">Zoho Desk</a><small>Melhor custo-benefício · DC em SP</small></td><td>Índia/EUA</td><td class="yes">Sim (SP)</td><td class="yes">✓</td><td class="yes">✓</td><td class="cost">~R$ 1.000</td></tr>
+          <tr><td class="plat"><span class="badge-rank">2</span><a href="https://www.zoho.com/desk/" target="_blank" rel="noopener">Zoho Desk</a><small>Melhor custo-benefício · região BR a validar</small></td><td>Índia/EUA</td><td>BR ⚠️</td><td class="yes">✓</td><td class="yes">✓</td><td class="cost">~R$ 1.000</td></tr>
           <tr><td class="plat"><span class="badge-rank">3</span><a href="https://www.octadesk.com/" target="_blank" rel="noopener">Octadesk</a><small>WhatsApp-first · usuários ilimitados</small></td><td>Brasil 🇧🇷</td><td class="yes">Sim</td><td class="yes">✓</td><td class="yes">✓</td><td class="cost">R$ 2.499+</td></tr>
-          <tr><td class="plat"><span class="badge-rank">4</span><a href="https://www.zendesk.com.br/" target="_blank" rel="noopener">Zendesk Suite</a><small>Benchmark global · light grátis</small></td><td>EUA</td><td>DPA</td><td class="yes">✓</td><td class="yes">✓</td><td class="cost">R$ 2.750+</td></tr>
+          <tr><td class="plat"><span class="badge-rank">4</span><a href="https://www.zendesk.com.br/" target="_blank" rel="noopener">Zendesk Suite</a><small>Benchmark global · light grátis (Growth+)</small></td><td>EUA</td><td>DPA</td><td class="yes">✓</td><td class="yes">✓</td><td class="cost">R$ 2.750+</td></tr>
           <tr><td class="plat"><span class="badge-rank">5</span><a href="https://www.freshworks.com/freshdesk/omni/" target="_blank" rel="noopener">Freshdesk Omni</a><small>Custo intermediário · IA Freddy</small></td><td>EUA/Índia</td><td>DPA</td><td class="yes">✓</td><td class="yes">✓</td><td class="cost">R$ 2.440+</td></tr>
           <tr style="background:var(--soft);"><td class="plat"><span class="badge-rank" style="background:#ede7fb;color:#7c3aed;">+</span><a href="https://www.chatwoot.com/" target="_blank" rel="noopener">Chatwoot + n8n</a><small>Stack técnico de baixo custo</small></td><td>Self-host 🇧🇷</td><td class="yes">Sim</td><td class="yes">✓</td><td>via n8n</td><td class="cost">~R$ 150</td></tr>
         </tbody>
       </table>
     </div>
     <p class="scroll-hint">→ Arraste a tabela para o lado para ver todas as colunas.</p>
-    <p class="src-note reveal">*Estimativa preliminar para ~6 usuários full + 9 colaboradores light e 800–1.200 tickets/mês (câmbio jun/2026; sem impostos, mensagens da Meta nem implantação). Nenhuma plataforma cobre sozinha os 31 fluxos sem configuração e integração com ERP, CMMS e controle de acesso.</p>
+    <p class="src-note reveal">*Estimativa preliminar para ~6 usuários full + 9 colaboradores light (câmbio jun/2026). <strong>Só licença</strong> — não inclui as taxas de conversa do WhatsApp cobradas pela Meta (+ markup do BSP), templates pagos para notificações fora da janela de 24h, impostos nem implantação. O custo total (TCO) é maior que o headline. <strong>Volume:</strong> a premissa de 800–1.200 tickets/mês parece baixa — a estatística do clube (12.230 msgs no Jivo + 1.410 WhatsApp + 1.365 Clubes Associados + 382 SAC em 5 meses) sugere <strong>2.000–3.500 conversas/mês</strong>, o que aperta planos por conversa e eleva o custo de WhatsApp. Nenhuma plataforma cobre sozinha os 31 fluxos sem configuração e integração com ERP, CMMS e controle de acesso.</p>
+
+    <div class="tier-head reveal">
+      <h3>Finalistas da RFP</h3><span class="tier-tag short">Shortlist · 5 plataformas</span>
+      <p>As cinco que melhor equilibram WhatsApp, tickets, SLA, IA, API, custo e chance real de implantação. Clique em “Ver critérios e preços detalhados” em cada cartão para abrir o status E1–E5, os preços publicados e a aderência por bloco de casos de uso.</p>
+    </div>
+    <div class="plat-grid" id="plat-short"></div>
+
+    <div class="tier-head reveal">
+      <h3>Longlist e alternativas avaliadas</h3><span class="tier-tag long">10 plataformas</span>
+      <p>Úteis por preço, experiência conversacional, IA ou colaboração interna — mas precisam provar SLA multiárea, permissão light, checklist, deduplicação e integração com ERP/CMMS antes de subir para a shortlist.</p>
+    </div>
+    <div class="plat-grid" id="plat-long"></div>
+
+    <div class="tier-head reveal">
+      <h3>Camada de IA, middleware e descartadas</h3><span class="tier-tag comp">Componentes &amp; complementares</span>
+      <p>Não substituem um service desk, mas mudam arquitetura e custo — ou foram eliminadas por um critério. Entram aqui porque ajudam a explicar a decisão.</p>
+    </div>
+    <div class="plat-grid" id="plat-comp"></div>
+
+    <div class="tier-head reveal">
+      <h3>Ranking consolidado de aderência</h3><span class="tier-tag short">Funcional + RNF</span>
+      <p><strong>Funcional %</strong> = cobertura dos 7 clusters dos 31 casos de uso. <strong>RNF %</strong> = média dos 7 requisitos não funcionais. <strong>Aderência total %</strong> = média simples dos dois. Não substitui a POC; ajuda a priorizar a RFP.</p>
+      <p class="src-note" style="margin-top:8px;"><strong>Leia como faixa, não como nota fechada:</strong> os percentuais vêm de converter ~7 avaliações qualitativas (Alto/Médio/Baixo) em 100/75/50/25/0 — a diferença entre 95% e 93% não tem significado estatístico. E a <strong>shortlist não é o top-5 por nota</strong>: ela combina nota com fit estratégico (Brasil, WhatsApp-first, LGPD, preço em reais). Por isso a Octadesk (#10) entra e Chatwoot+n8n (#6) e Dixa (#8) ficam de fora.</p>
+    </div>
+    <div class="table-wrap reveal">
+      <table class="cmp">
+        <thead>
+          <tr><th>#</th><th>Plataforma</th><th>Funcional</th><th>RNF</th><th>Aderência total</th><th>Leitura para a decisão</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="badge-rank">1</span></td><td class="plat">Zendesk Suite<small>★ shortlist da RFP</small></td><td>100%</td><td>89%</td><td class="cost">95%</td><td>Melhor benchmark técnico; custo em dólar e LGPD são as restrições.</td></tr>
+          <tr><td><span class="badge-rank">2</span></td><td class="plat">Microsoft Dynamics 365</td><td>100%</td><td>86%</td><td class="cost">93%</td><td>Tecnicamente completo, mas excessivo para o MVP por custo e complexidade.</td></tr>
+          <tr><td><span class="badge-rank">3</span></td><td class="plat">Freshdesk Omni<small>★ shortlist da RFP</small></td><td>96%</td><td>86%</td><td class="cost">91%</td><td>Melhor premium intermediária; validar canais, IA e DPA no pacote.</td></tr>
+          <tr><td><span class="badge-rank">4</span></td><td class="plat">Zoho Desk<small>★ shortlist da RFP</small></td><td>89%</td><td>79%</td><td class="cost">84%</td><td>Melhor custo-benefício se config. e usabilidade forem aprovadas.</td></tr>
+          <tr><td><span class="badge-rank">5</span></td><td class="plat">HubSpot Service Hub</td><td>75%</td><td>86%</td><td class="cost">80%</td><td>Forte se virar CRM institucional; menos natural como SD operacional puro.</td></tr>
+          <tr><td><span class="badge-rank">6</span></td><td class="plat">Chatwoot + n8n</td><td>75%</td><td>75%</td><td class="cost">75%</td><td>Melhor opção técnica de baixo custo, dependente de manutenção interna.</td></tr>
+          <tr><td><span class="badge-rank">7</span></td><td class="plat">Zenvia / Movidesk<small>★ shortlist da RFP</small></td><td>71%</td><td>71%</td><td class="cost">71%</td><td>Melhor fit local potencial; provar checklists, API/CMMS, exportação e logs.</td></tr>
+          <tr><td><span class="badge-rank">8</span></td><td class="plat">Dixa</td><td>71%</td><td>68%</td><td class="cost">70%</td><td>Bom benchmark moderno, ainda dependente de validação comercial e LGPD.</td></tr>
+          <tr><td><span class="badge-rank">9</span></td><td class="plat">Front</td><td>61%</td><td>71%</td><td class="cost">66%</td><td>Excelente colaboração interna, menos aderente a portal, CMMS e checklists.</td></tr>
+          <tr><td><span class="badge-rank">10</span></td><td class="plat">Octadesk<small>★ shortlist da RFP</small></td><td>61%</td><td>71%</td><td class="cost">66%</td><td>Forte WhatsApp-first, mas o <strong>slot mais fraco</strong> da shortlist: helpdesk a R$ 100/usuário pode levar a ~R$ 4.000/mês (a opção BR mais cara) e a menor nota funcional.</td></tr>
+          <tr><td><span class="badge-rank">11</span></td><td class="plat">LiveAgent</td><td>64%</td><td>68%</td><td class="cost">66%</td><td>Helpdesk econômico; WhatsApp oficial e IA precisam de demonstração.</td></tr>
+          <tr><td><span class="badge-rank">12</span></td><td class="plat">Intercom + Fin</td><td>61%</td><td>71%</td><td class="cost">66%</td><td>IA forte, mas custo por outcome e operação física multiárea reduzem o fit.</td></tr>
+          <tr><td><span class="badge-rank">13</span></td><td class="plat">respond.io</td><td>57%</td><td>68%</td><td class="cost">63%</td><td>Muito bom para mensageria; precisa provar ticketing formal e governança.</td></tr>
+          <tr><td><span class="badge-rank">14</span></td><td class="plat">Trengo</td><td>54%</td><td>71%</td><td class="cost">63%</td><td>Bom inbox omnicanal; exige validar SLA, deduplicação e workflow estruturado.</td></tr>
+          <tr><td><span class="badge-rank">15</span></td><td class="plat">Blip</td><td>57%</td><td>64%</td><td class="cost">61%</td><td>Excelente camada conversacional; não assumir como SD único sem POC forte.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="scroll-hint">→ Arraste a tabela para o lado para ver todas as colunas.</p>
+    <p class="src-note reveal">Itens fora da lista formal de 15 (nota preliminar): Salesforce Service Cloud 95% · ServiceNow / Freshservice 83% · Jira Service Management 73% · Huggy 64% · ASC SAC 62% · JivoChat 50% — não deslocam a shortlist por custo, sobreposição ou fit de canal. Fontes: comparativo de sistemas omnichannel e dossiê de plataformas candidatas (revisões de 22 a 26/jun/2026).</p>
   </div>
 </section>
 
@@ -619,14 +743,14 @@
         <h3>SaaS puro</h3>
         <div class="pcost">menor risco técnico <small>/ maior custo</small></div>
         <ul class="plist">
-          <li class="pro"><span class="m">+</span><span>Shortlist <strong>Zoho Desk</strong> e <strong>Movidesk</strong>; fallback premium <strong>Zendesk Team</strong>.</span></li>
+          <li class="pro"><span class="m">+</span><span>Shortlist <strong>Zoho Desk</strong> e <strong>Movidesk</strong>; fallback premium <strong>Zendesk Growth</strong> (1º plano com light grátis).</span></li>
           <li class="pro"><span class="m">+</span><span>Suporte do fornecedor, sem infraestrutura para o clube manter.</span></li>
           <li class="pro"><span class="m">+</span><span>Roteamento, SLA e relatórios já embutidos no produto.</span></li>
           <li class="con"><span class="m">!</span><span>Recursos avançados ficam nos planos mais caros; custo mensal maior.</span></li>
         </ul>
       </div>
       <div class="path b reveal">
-        <div class="ribbon">Recomendado se houver TI interna</div>
+        <div class="ribbon">Opcional · só com TI dedicada</div>
         <div class="ptag">Caminho B</div>
         <h3>Service Desk + n8n</h3>
         <div class="pcost">60–80% mais barato <small>/ exige manutenção técnica</small></div>
@@ -634,7 +758,7 @@
           <li class="pro"><span class="m">+</span><span><strong>n8n</strong> (€20/mês) como middleware de roteamento, SLA e integrações com ERP/CMMS.</span></li>
           <li class="pro"><span class="m">+</span><span>Service Desk em plano básico: <strong>Zoho Standard</strong> ou <strong>Chatwoot</strong>. Self-hosted ~R$ 150/mês.</span></li>
           <li class="pro"><span class="m">+</span><span>Lógica de roteamento explícita, versionável e auditável.</span></li>
-          <li class="con"><span class="m">!</span><span>Depende de perfil técnico para manter os workflows — atenção ao risco de sucessão.</span></li>
+          <li class="con"><span class="m">!</span><span><strong>Ponto único de falha:</strong> a economia (~R$ 40k/ano ≈ 0,07% da receita) é trivial frente ao risco de sustentar um sistema P0 do associado em um único voluntário-engenheiro. Recomendado manter SaaS na porta de produção; n8n no máximo como cola de integração.</span></li>
         </ul>
       </div>
     </div>
@@ -648,6 +772,11 @@
       <span class="eyebrow">Próximos passos</span>
       <h2>RFP curta + POC de 30 dias.</h2>
       <p class="lead">A POC precisa provar workflow, colaborador light, checklist, deduplicação e integração — não apenas o canal de WhatsApp.</p>
+    </div>
+    <div class="reveal" style="background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.18); border-left:4px solid var(--g400); border-radius:14px; padding:20px 24px; margin-bottom:28px;">
+      <div style="font-family:var(--serif); font-weight:800; font-size:.78rem; letter-spacing:.1em; text-transform:uppercase; color:var(--g300); margin-bottom:6px;">Passo 0 · antes da RFP</div>
+      <h4 style="color:#fff; font-size:1.15rem; margin-bottom:8px;">Confirmar a API do ERP Clubes Associados</h4>
+      <p style="color:#cfe9d8; font-size:.95rem;">O gargalo real não é o helpdesk — é a integração com o ERP. Os casos de maior volume (boleto, extrato, cadastro, matrícula, societária) <strong>dependem de o Clubes Associados expor API</strong>. Sem API, o self-service 24h do UC-02 <strong>deixa de existir em qualquer plataforma</strong> e a comparação colapsa para "qual ferramenta melhor suporta fluxo manual". Confirmar (a) se há API REST/consulta para boleto, extrato, status financeiro, cadastro e adimplência e (b) se a 2ª via de boleto já existe no app/portal atual — <strong>isso pode reordenar a prioridade dos casos de uso</strong>.</p>
     </div>
     <div class="steps">
       <div class="step reveal"><div class="sn">1</div><h4>RFP para 5 fornecedores</h4><p>Zenvia/Movidesk, Zoho Desk, Octadesk, Zendesk e Freshdesk, com perguntas firmes sobre WhatsApp, light users, SLA por área+sede, API para ERP/CMMS, LGPD e exportação.</p></div>
@@ -1244,6 +1373,613 @@ document.querySelectorAll("#clfilter .fbtn").forEach(b =>
   }));
 document.getElementById("ucsearch").addEventListener("input", e => { curQ = e.target.value; render(); });
 render();
+
+/* ===== Plataformas: cartões de pontos fortes / pontos de atenção ===== */
+const PLATFORMS = [
+  {
+    rank:"1", tier:"short", name:"Zenvia Customer Cloud / Movidesk", url:"https://zenvia.com/",
+    meta:"Brasil 🇧🇷 · dados no Brasil · Meta partner oficial",
+    fit:"Fit muito alto — melhor equilíbrio local",
+    cost:"R$ 1.900+/mês", costSub:"Expert (até 15 usuários) · setup R$ 1.999 · 1º mês ~R$ 3.899",
+    scores:{func:"71", rnf:"71", total:"71"},
+    pros:[
+      "Melhor fit LGPD: empresa e dados 100% no Brasil",
+      "Preço em real, sem risco cambial, e suporte local em português",
+      "Conhece o mercado brasileiro de clubes e associações",
+      "WhatsApp, Instagram, Messenger, SMS, RCS, webchat e e-mail no mesmo ecossistema",
+      "IA generativa, agentes de IA, escrita inteligente e base de conhecimento com IA"
+    ],
+    cons:[
+      "Movidesk foi adquirida pela Zenvia em 2021 — incerteza de roadmap e marca",
+      "Ecossistema de integrações menor que Zendesk e Freshdesk",
+      "Confirmar se o modelo Light/Colaborador é competitivo",
+      "Confirmar franquia de WhatsApp para 800–1.200 tickets/mês e API para o CMMS",
+      "Precisa demonstrar profundidade de checklist e exportação completa"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"WhatsApp Business API nativa — Meta partner oficial"},
+      {c:"E2", s:"ok", t:"WhatsApp, e-mail, portal, Facebook e Instagram"},
+      {c:"E3", s:"ok", t:"Gestão de SLA nativa"},
+      {c:"E4", s:"warn", t:"Tipos de usuário diferenciados — confirmar modelo e custo"},
+      {c:"E5", s:"ok", t:"REST API disponível"}
+    ],
+    precos:[
+      "Specialist: R$ 600/mês — 10 usuários · setup R$ 649",
+      "Expert: R$ 1.800/mês — 30 usuários · setup R$ 1.999",
+      "Professional: R$ 3.900/mês — 50 usuários · setup R$ 3.999",
+      "Pacote mínimo de canais: R$ 100/mês; WhatsApp pode exigir pacote maior"
+    ],
+    matriz:"Front door Alto · Financeiro Médio/alto · Acesso Médio · Esporte Médio · Manutenção Médio/alto · Governança Alto · Sociedade Médio"
+  },
+  {
+    rank:"2", tier:"short", name:"Zoho Desk", url:"https://www.zoho.com/desk/",
+    meta:"Índia/EUA · região BR/São Paulo (~2024) — validar p/ o Desk ⚠️",
+    fit:"Fit alto — melhor custo-benefício",
+    cost:"~R$ 1.000/mês", costSub:"Professional (6 full ~R$ 710 + 9 light ~R$ 280) · antes de WhatsApp/BSP e IA",
+    scores:{func:"89", rnf:"79", total:"84"},
+    pros:[
+      "Melhor custo-benefício absoluto entre os service desks completos",
+      "Região de dados Brasil/São Paulo desde ~2024 — facilita LGPD se confirmada para o Zoho Desk (rollout por produto)",
+      "Integra nativamente com Microsoft 365 e com toda a suíte Zoho",
+      "WhatsApp, Instagram, Messenger, Telegram, WeChat, Line, e-mail, portal, web forms e KB",
+      "Webhooks, custom actions, workflows, multi-department e IA generativa via OpenAI"
+    ],
+    cons:[
+      "Interface menos intuitiva que Zendesk/Freshdesk para usuários não técnicos",
+      "WhatsApp nativo exige configuração via BSP próprio — menos plug-and-play",
+      "Suporte em português existe, mas é menos imediato que fornecedores locais",
+      "Confirmar preço oficial em BRL/USD e custo exato de Light users"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"WhatsApp via Zoho SalesIQ ou integração nativa"},
+      {c:"E2", s:"ok", t:"WhatsApp, e-mail, portal, telefonia e redes sociais"},
+      {c:"E3", s:"ok", t:"SLA completo, configurável por fila e horário"},
+      {c:"E4", s:"ok", t:"Plano gratuito até 3 agentes; Light pago muito acessível"},
+      {c:"E5", s:"ok", t:"REST API + webhooks + scripting Deluge"}
+    ],
+    precos:[
+      "Standard: ~US$ 14 (~R$ 84)/agente/mês",
+      "Professional: ~US$ 23 (~R$ 138)/agente/mês",
+      "Enterprise: ~US$ 40 (~R$ 240)/agente/mês — answer bot, Guided Conversations, skill-based",
+      "Light users pagos em Professional/Enterprise (referência ~US$ 6)"
+    ],
+    matriz:"Front door Alto · Financeiro Alto · Acesso Médio/alto · Esporte Médio/alto · Manutenção Alto · Governança Alto · Sociedade Médio/alto"
+  },
+  {
+    rank:"3", tier:"short", name:"Octadesk", url:"https://www.octadesk.com/",
+    meta:"Brasil 🇧🇷 · dados no Brasil · WhatsApp-first",
+    fit:"Fit alto — melhor experiência WhatsApp",
+    cost:"R$ 2.499+/mês", costSub:"Plano One (usuários ilimitados) · até R$ 3.999 com helpdesk por usuário",
+    scores:{func:"61", rnf:"71", total:"66"},
+    pros:[
+      "WhatsApp-first: melhor experiência nativa para o canal principal do clube",
+      "Empresa e dados brasileiros — LGPD nativa",
+      "Usuários ilimitados no pacote conversacional",
+      "IA WOZ (agente + copiloto), transcrição de áudio e resposta por base de conhecimento",
+      "Foco em B2C, perfil semelhante ao quadro de associados"
+    ],
+    cons:[
+      "Empresa menor — menor ecossistema de integrações e comunidade de suporte",
+      "Confirmar se a API integra com o CMMS (criação de OS externa)",
+      "Helpdesk cobrado a R$ 100/usuário/mês — confirmar se é obrigatório para todos",
+      "Precisa provar ticketing complexo, SLA por fila/sede e deduplicação"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"Meta Business Partner oficial — WhatsApp-first"},
+      {c:"E2", s:"ok", t:"WhatsApp, Instagram, Facebook, WebChat e e-mail"},
+      {c:"E3", s:"ok", t:"Gestão de SLA nativa"},
+      {c:"E4", s:"warn", t:"Confirmar modelo de colaborador eventual"},
+      {c:"E5", s:"ok", t:"API aberta disponível"}
+    ],
+    precos:[
+      "Plano One: R$ 2.499/mês — 3.000 conversas/DAUs, usuários ilimitados, 1 WhatsApp oficial",
+      "Plano superior: R$ 4.399/mês — 5.500 conversas/DAUs",
+      "Helpdesk: R$ 100/usuário/mês · onboarding obrigatório sob consulta"
+    ],
+    matriz:"Front door Alto · Financeiro Médio · Acesso Médio · Esporte Médio · Manutenção Médio · Governança Médio/alto · Sociedade Médio"
+  },
+  {
+    rank:"4", tier:"short", name:"Zendesk Suite", url:"https://www.zendesk.com.br/",
+    meta:"EUA · dados em EUA/UE (exige DPA)",
+    fit:"Fit alto técnico, médio financeiro — benchmark global",
+    cost:"R$ 2.750–3.550+/mês", costSub:"Suite Growth (Light incluso) a Professional · + IA e WhatsApp",
+    scores:{func:"100", rnf:"89", total:"95"},
+    pros:[
+      "Light Agents gratuitos a partir do Suite Growth (50 inclusos) — no Suite Team são add-on pago",
+      "API mais madura do mercado — integração com CMMS bem documentada",
+      "Maior ecossistema de integrações (1.500+)",
+      "Maior maturidade em ticketing, colaboração, permissões e IA",
+      "Melhor benchmark técnico: 100% funcional e 89% de RNF"
+    ],
+    cons:[
+      "Mais caro entre os candidatos — custo em dólar com variação cambial",
+      "Dados fora do Brasil — exige DPA e cláusula LGPD no contrato",
+      "Configuração mais complexa para equipes sem TI dedicada",
+      "IA cobrada por resolução automatizada; pode ser mais ferramenta do que o MVP precisa"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"Nativo via Sunshine Conversations ou canal direto"},
+      {c:"E2", s:"ok", t:"WhatsApp, e-mail, portal, voz e redes sociais"},
+      {c:"E3", s:"ok", t:"Completo, configurável por fila e horário"},
+      {c:"E4", s:"warn", t:"Light grátis a partir do Growth (50); no Suite Team é add-on pago"},
+      {c:"E5", s:"ok", t:"REST API + webhooks + marketplace com 1.500+ integrações"}
+    ],
+    precos:[
+      "Suite Team: ~US$ 55/agente/mês",
+      "Suite Growth: ~US$ 89/agente/mês — inclui 50 light agents",
+      "Suite Professional: ~US$ 115/agente/mês — SLA avançado, roteamento por habilidades, 100 light",
+      "Copilot: ~US$ 50/agente/mês · IA por resolução automatizada à parte"
+    ],
+    matriz:"Front door Alto · Financeiro Alto · Acesso Alto · Esporte Alto · Manutenção Alto · Governança Alto · Sociedade Alto"
+  },
+  {
+    rank:"5", tier:"short", name:"Freshdesk Omni", url:"https://www.freshworks.com/freshdesk/omni/",
+    meta:"EUA/Índia · dados em EUA/UE/Índia (exige DPA)",
+    fit:"Fit alto — custo intermediário",
+    cost:"R$ 2.440+/mês", costSub:"Omni Pro (6 agentes) · 9 colaboradores cabem nos 5.000 inclusos",
+    scores:{func:"96", rnf:"86", total:"91"},
+    pros:[
+      "Melhor custo-benefício no nível intermediário (mais barato que Zendesk)",
+      "IA Freddy já incluída em planos superiores (AI Agent Studio, agentic workflows)",
+      "App mobile nativo robusto",
+      "5.000 colaboradores inclusos em Pro+ — acomoda bem os 9 light",
+      "Alta cobertura funcional (96%) com custo menor que o benchmark"
+    ],
+    cons:[
+      "WhatsApp exige o pacote Freshdesk Omni — eleva o custo vs. plano base",
+      "Modelo Light/Collaborator menos transparente — validar antes de assinar",
+      "Dados fora do Brasil — exige DPA",
+      "IA além das 500 sessões iniciais pode subir o custo; validar canais no pacote"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"Via Freshdesk Omni (requer upgrade do plano base)"},
+      {c:"E2", s:"ok", t:"WhatsApp, e-mail, portal, telefonia e redes sociais"},
+      {c:"E3", s:"ok", t:"Completo"},
+      {c:"E4", s:"warn", t:"Collaborators em Pro/Enterprise — validar custo no contrato"},
+      {c:"E5", s:"ok", t:"REST API + webhooks"}
+    ],
+    precos:[
+      "Omni Growth: ~US$ 29/agente/mês",
+      "Omni Pro: ~US$ 79/agente/mês",
+      "Omni Enterprise: ~US$ 119/agente/mês — skill-based assignment",
+      "Freddy AI: 500 sessões inclusas; depois ~US$ 49 por 100 sessões"
+    ],
+    matriz:"Front door Alto · Financeiro Alto · Acesso Alto · Esporte Alto · Manutenção Alto · Governança Alto · Sociedade Médio/alto"
+  },
+
+  {
+    rank:"◆", tier:"long", name:"Blip", url:"https://www.blip.ai/",
+    meta:"Brasil 🇧🇷 · parceiro oficial Meta",
+    fit:"Fit médio-alto — automação conversacional",
+    cost:"Sob consulta", costSub:"Proposta comercial — pedir 6 full + 9 light",
+    scores:{func:"57", rnf:"64", total:"61"},
+    pros:[
+      "Uma das plataformas brasileiras mais reconhecidas em bots, WhatsApp oficial e IA",
+      "WhatsApp, Instagram, Messenger, Telegram, Teams, RCS, Apple Messages, e-mail e SMS",
+      "Blip Desk para atendimento humano; bots, IA conversacional e APIs",
+      "Excelente como camada de automação sobre o canal principal"
+    ],
+    cons:[
+      "Validar o Blip Desk como service desk: SLA por fila, notas internas, permissões e dashboards",
+      "Custo real por DAU/mensagem/bot/atendente fica sob consulta",
+      "Pode ser melhor como camada conversacional sobre um SD do que como SD único",
+      "Validar exportação completa e previsibilidade comercial"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"Parceiro oficial Meta/WhatsApp"},
+      {c:"E2", s:"ok", t:"Muitos canais; tickets a validar no Blip Desk"},
+      {c:"E3", s:"warn", t:"SLA, backlog e governança de tickets a validar"},
+      {c:"E4", s:"warn", t:"Plano por proposta comercial"},
+      {c:"E5", s:"ok", t:"Integrações e APIs"}
+    ],
+    precos:[
+      "Conta gratuita: até 2 agentes, sem WhatsApp pago",
+      "Planos com WhatsApp: proposta comercial"
+    ],
+    matriz:"Front door Alto · Financeiro Alto p/ bot/API · Acesso Médio · Esporte Médio · Manutenção Médio · Governança Médio · Sociedade Baixo/médio"
+  },
+  {
+    rank:"◆", tier:"long", name:"Chatwoot + n8n", url:"https://www.chatwoot.com/",
+    meta:"Open source · self-host Brasil ✅ / cloud EUA",
+    fit:"Fit médio-alto se houver TI interna",
+    cost:"R$ 150–810/mês", costSub:"Self-hosted ~R$ 150 (menor da lista) · cloud ~R$ 810 (5 ag + n8n)",
+    scores:{func:"75", rnf:"75–79", total:"75–77"},
+    pros:[
+      "Open source: sem lock-in, sem risco de aumento de preço, código auditável",
+      "Self-hosted: dados 100% no Brasil — LGPD nativa",
+      "Custo total mais baixo da lista quando self-hosted",
+      "API excelente; n8n dá roteamento explícito, versionável e auditável (1.700+ integrações)"
+    ],
+    cons:[
+      "Self-hosted exige infraestrutura: Docker, VPS, backups e atualizações",
+      "Suporte comunitário (fórum/GitHub) — sem SLA contratual",
+      "UI menos polida que Zendesk/Freshdesk — impacto na adoção",
+      "Sem distinção Light: 9 colaboradores = +US$ 171/mês no cloud",
+      "Dependência operacional do n8n e risco de sucessão técnica"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"WhatsApp Business API nativo (a partir do Startups)"},
+      {c:"E2", s:"ok", t:"WhatsApp, Instagram, Facebook, e-mail, SMS, Telegram, WebChat e API Channel"},
+      {c:"E3", s:"ok", t:"SLA e escalonamento via n8n (substitui o tier Business)"},
+      {c:"E4", s:"warn", t:"Sem distinção Light — todos os agentes pagam US$ 19"},
+      {c:"E5", s:"ok", t:"REST API robusta"}
+    ],
+    precos:[
+      "Chatwoot Startups: US$ 19/agente/mês · Business US$ 39 · Enterprise US$ 99",
+      "n8n Starter: €20/mês (2.500 execuções) · Pro €50",
+      "Self-hosted (ambos, 1 VPS): ~R$ 150/mês"
+    ],
+    matriz:"Front door Alto · Financeiro Médio/alto · Acesso Médio/alto · Esporte Médio · Manutenção Alto via n8n · Governança Médio/alto · Sociedade Médio"
+  },
+  {
+    rank:"◆", tier:"long", name:"Dixa", url:"https://www.dixa.com/",
+    meta:"Dinamarca/EUA · validar residência e DPA",
+    fit:"Fit médio-alto — benchmark internacional moderno",
+    cost:"Sob consulta", costSub:"Exigir custo total para 6 full + 9 light, WhatsApp, IA e exportação",
+    scores:{func:"71", rnf:"68", total:"70"},
+    pros:[
+      "Inbox omnichannel moderno: voz, e-mail, chat e messaging no mesmo ambiente",
+      "Roteamento, filas, automações, analytics e IA",
+      "Bom para front door omnicanal, atendimento assistido e governança de filas"
+    ],
+    cons:[
+      "Confirmar WhatsApp oficial, BSP e custo de conversa/template",
+      "Validar residência de dados, DPA, suboperadores e custo por colaborador light",
+      "Testar checklist e anexos para movimentação societária e externos (UC-26/28/31)"
+    ],
+    elim:[
+      {c:"E1", s:"warn", t:"Suporta messaging; confirmar WhatsApp oficial e BSP"},
+      {c:"E2", s:"ok", t:"Voz, e-mail, chat e messaging unificados"},
+      {c:"E3", s:"ok", t:"Roteamento, fila e automação; validar granularidade por área/sede"},
+      {c:"E4", s:"warn", t:"Modelo por usuário/plano; confirmar colaborador eventual"},
+      {c:"E5", s:"ok", t:"APIs e integrações documentadas"}
+    ],
+    precos:["Planos sob consulta — variam por proposta e região"],
+    matriz:"Front door Alto · Financeiro Médio/alto · Acesso Médio · Esporte Médio · Manutenção Médio/alto · Governança Alto · Sociedade Médio"
+  },
+  {
+    rank:"◆", tier:"long", name:"respond.io", url:"https://respond.io/",
+    meta:"Malásia/EUA · validar residência e DPA",
+    fit:"Fit alto para WhatsApp-first",
+    cost:"Sob consulta", costSub:"Pedir cenário com 1.200 tickets/mês, 6 full + 9 light",
+    scores:{func:"57", rnf:"68", total:"63"},
+    pros:[
+      "Messaging-first: WhatsApp, Instagram, Messenger, Telegram, e-mail e webchat",
+      "Inbox compartilhado, roteamento, automações, IA e relatórios",
+      "Forte para captura de redes sociais, triagem e automação inicial"
+    ],
+    cons:[
+      "Provar ticketing operacional, deduplicação e comentários internos protegidos",
+      "Validar SLA formal por fila/criticidade e dashboards por área/sede",
+      "Risco de virar ótima camada conversacional sem governança de service desk"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"WhatsApp Business Platform/API como canal central"},
+      {c:"E2", s:"ok", t:"WhatsApp, Instagram, Messenger, Telegram, e-mail e webchat"},
+      {c:"E3", s:"warn", t:"Automações e roteamento existem; validar SLA formal por fila"},
+      {c:"E4", s:"warn", t:"Planos por usuário/assento; confirmar perfil interno barato"},
+      {c:"E5", s:"ok", t:"API e webhooks"}
+    ],
+    precos:["Planos por usuário/espaço de trabalho — confirmar valores e limites na proposta"],
+    matriz:"Front door Alto · Financeiro Médio/alto · Acesso Médio · Esporte Médio · Manutenção Médio · Governança Médio · Sociedade Baixo/médio"
+  },
+  {
+    rank:"◆", tier:"long", name:"Trengo", url:"https://trengo.com/",
+    meta:"Holanda · validar residência e DPA",
+    fit:"Fit médio-alto — inbox omnicanal",
+    cost:"Sob consulta", costSub:"Confirmar pacote com WhatsApp oficial, API, automações e permissões",
+    scores:{func:"54", rnf:"71", total:"63"},
+    pros:[
+      "Inbox de equipe com WhatsApp, e-mail, chat, Instagram e Facebook",
+      "Automações, bots, IA, relatórios e API",
+      "Bom para centralizar mensagens e reduzir canais paralelos"
+    ],
+    cons:[
+      "Validar SLA por fila, criticidade e horário",
+      "Testar deduplicação (UC-24), cobrança automática de áreas (UC-25) e societária (UC-26)",
+      "Menos seguro que service desks maduros para processos multiárea com CMMS"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"WhatsApp Business como canal suportado"},
+      {c:"E2", s:"ok", t:"WhatsApp, e-mail, chat, redes sociais e voz conforme plano"},
+      {c:"E3", s:"warn", t:"Regras/automações e relatórios; validar SLA por fila e horário"},
+      {c:"E4", s:"warn", t:"Modelo por seat/plano; confirmar custo de colaboradores eventuais"},
+      {c:"E5", s:"ok", t:"API e webhooks"}
+    ],
+    precos:["Planos por seat — confirmar pacote com WhatsApp, automações, relatórios e API"],
+    matriz:"Front door Alto · Financeiro Médio · Acesso Médio · Esporte Médio · Manutenção Médio · Governança Médio · Sociedade Baixo/médio"
+  },
+  {
+    rank:"◆", tier:"long", name:"LiveAgent", url:"https://www.liveagent.com/",
+    meta:"Eslováquia/EUA · validar residência e DPA",
+    fit:"Fit médio — helpdesk econômico",
+    cost:"Baixo/médio — a confirmar", costSub:"Confirmar plano mínimo para SLA, API, automações e WhatsApp",
+    scores:{func:"64", rnf:"68", total:"66"},
+    pros:[
+      "Helpdesk maduro e acessível: ticketing, e-mail, chat, call center, portal e KB",
+      "SLA e automações maduras; API documentada",
+      "Custo potencialmente menor que Zendesk/Freshdesk"
+    ],
+    cons:[
+      "WhatsApp oficial costuma depender de integração/BSP — risco no canal primário",
+      "Validar colaborador light; se todos pagam como agente, o custo sobe",
+      "Validar experiência mobile-first e checklists/anexos (UC-26/28/31)"
+    ],
+    elim:[
+      {c:"E1", s:"warn", t:"WhatsApp por integração/conector; confirmar canal oficial no Brasil"},
+      {c:"E2", s:"ok", t:"E-mail, chat, portal, telefonia e redes/conectores"},
+      {c:"E3", s:"ok", t:"SLA e automações maduras"},
+      {c:"E4", s:"warn", t:"Modelo por agente; confirmar colaborador eventual"},
+      {c:"E5", s:"ok", t:"API documentada"}
+    ],
+    precos:["Planos por agente — confirmar plano mínimo para SLA, API, automações e WhatsApp"],
+    matriz:"Front door Médio · Financeiro Médio/alto · Acesso Médio · Esporte Médio · Manutenção Médio/alto · Governança Alto · Sociedade Médio"
+  },
+  {
+    rank:"◆", tier:"long", name:"Front", url:"https://front.com/",
+    meta:"EUA · validar residência e DPA",
+    fit:"Fit médio — colaboração interna",
+    cost:"Médio/alto — a confirmar", costSub:"Pode encarecer se todo colaborador precisar de seat pago",
+    scores:{func:"61", rnf:"71", total:"66"},
+    pros:[
+      "Inbox compartilhado e colaboração interna fortes (bom para UC-25, UC-22 e assistido)",
+      "Comentários internos, regras, SLAs e analytics",
+      "API e marketplace; reduz e-mails e WhatsApps setoriais paralelos"
+    ],
+    cons:[
+      "Menos natural como service desk com portal, fila pública, checklists e CMMS",
+      "Confirmar WhatsApp oficial e custo por canal",
+      "Pode ficar caro se todo colaborador precisar de seat pago",
+      "Risco de processos com checklist virarem apenas conversas internas"
+    ],
+    elim:[
+      {c:"E1", s:"warn", t:"Suporte via canais/integrações; confirmar WhatsApp oficial"},
+      {c:"E2", s:"ok", t:"E-mail, SMS, chat, social/messaging conforme plano"},
+      {c:"E3", s:"ok", t:"SLAs, regras, roteamento e analytics nos planos adequados"},
+      {c:"E4", s:"warn", t:"Foco em seats pagos; confirmar colaborador eventual"},
+      {c:"E5", s:"ok", t:"API e marketplace"}
+    ],
+    precos:["Planos por seat — confirmar plano mínimo para SLAs, automações, API e messaging"],
+    matriz:"Front door Médio/alto · Financeiro Médio · Acesso Médio · Esporte Médio · Manutenção Médio · Governança Alto · Sociedade Médio"
+  },
+  {
+    rank:"◆", tier:"long", name:"Intercom + Fin", url:"https://www.intercom.com/",
+    meta:"EUA/Irlanda · IA forte (Fin)",
+    fit:"Fit médio — IA de deflexão",
+    cost:"R$ 2.630–4.080/mês + IA", costSub:"Advanced a Expert · Fin US$ 0,99/resolução (~R$ 1.530 p/ 300)",
+    scores:{func:"61", rnf:"71", total:"66"},
+    pros:[
+      "Fin AI Agent em todos os planos — IA de deflexão muito forte",
+      "Shared inbox, ticketing, Messenger, help center e workflows",
+      "WhatsApp, Instagram, Facebook, SMS e Slack; Lite seats inclusos (20 Advanced / 50 Expert)"
+    ],
+    cons:[
+      "Custo de IA imprevisível — cobrado por outcome/resolução",
+      "SLA completo só no plano Expert",
+      "Menos natural para manutenção/CMMS e tickets que circulam por áreas físicas",
+      "Nasceu orientado a atendimento digital/tech, não a operação física de clube"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"WhatsApp documentado para Fin/Intercom"},
+      {c:"E2", s:"ok", t:"Messenger, e-mail, social e ticketing"},
+      {c:"E3", s:"warn", t:"SLAs apenas no plano Expert"},
+      {c:"E4", s:"ok", t:"Lite seats inclusos (20 no Advanced / 50 no Expert)"},
+      {c:"E5", s:"ok", t:"API e workflows"}
+    ],
+    precos:[
+      "Essential: US$ 19–29/seat · Advanced US$ 85 (20 Lite) · Expert US$ 132 (50 Lite, SLAs)",
+      "Fin AI Agent: US$ 0,99 por resolução · Copilot US$ 29/agente"
+    ],
+    matriz:"Front door Alto · Financeiro Alto p/ IA · Acesso Médio · Esporte Médio · Manutenção Baixo/médio · Governança Alto no Expert · Sociedade Médio"
+  },
+  {
+    rank:"◆", tier:"long", name:"HubSpot Service Hub", url:"https://www.hubspot.com/products/service",
+    meta:"EUA · orientado a CRM",
+    fit:"Fit médio — forte se virar CRM amplo",
+    cost:"R$ 3.090+/mês + onboarding", costSub:"6 seats Professional · onboarding US$ 1.500 (~R$ 7.725)",
+    scores:{func:"75", rnf:"86", total:"80"},
+    pros:[
+      "Service Hub AI-powered, omnichannel e conectado ao CRM (visão 360)",
+      "Help desk, tickets, portal, base de conhecimento, automações e relatórios",
+      "WhatsApp no help desk em Professional/Enterprise; Breeze Customer Agent",
+      "Forte para prospecção e admissão (UC-26/27) por trazer funil de CRM"
+    ],
+    cons:[
+      "Caro e menos natural como service desk operacional puro",
+      "Validar modelo para colaboradores eventuais — seats pagos sobem o custo",
+      "Validar limites/custos de HubSpot Credits para o Customer Agent",
+      "Onboarding Professional obrigatório (US$ 1.500)"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"WhatsApp Business conectado ao help desk (Pro/Enterprise)"},
+      {c:"E2", s:"ok", t:"Omnichannel via CRM/inbox"},
+      {c:"E3", s:"ok", t:"SLA e automações"},
+      {c:"E4", s:"warn", t:"Light não tão claro; validar seats para colaboradores"},
+      {c:"E5", s:"ok", t:"Marketplace amplo e API"}
+    ],
+    precos:[
+      "Service Hub Professional: US$ 100/seat/mês (anual US$ 90) · onboarding US$ 1.500",
+      "Enterprise: US$ 150/seat/mês · onboarding US$ 3.500"
+    ],
+    matriz:"Front door Médio/alto · Financeiro Alto · Acesso Médio · Esporte Médio · Manutenção Médio · Governança Alto · Sociedade Alto"
+  },
+  {
+    rank:"◆", tier:"long", name:"Microsoft Dynamics 365", url:"https://www.microsoft.com/dynamics-365/products/customer-service",
+    meta:"EUA · data center no Brasil ✅",
+    fit:"Fit médio-baixo p/ MVP; alto se padronizar o Microsoft 365",
+    cost:"R$ 6.000+/mês + implantação", costSub:"Customer Service Premium (6 usuários) + parceiro Microsoft",
+    scores:{func:"100", rnf:"86", total:"93"},
+    pros:[
+      "Integração perfeita com Microsoft 365 — Teams, Outlook, SharePoint e Power BI",
+      "Pode eliminar ferramentas paralelas internas (Monday, Trello)",
+      "Dados no Brasil disponíveis; case management, IA e self-service",
+      "Extensibilidade forte para ERP, CMMS e dashboards — cobre quase tudo"
+    ],
+    cons:[
+      "Complexidade de implantação muito alta — exige parceiro Microsoft certificado",
+      "Custo total (licença + implantação + manutenção) é o mais alto da lista",
+      "Curva de aprendizado longa para equipes operacionais",
+      "Excessivo para o MVP — só se houver plano de expansão Microsoft 365"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"Via Omnichannel for Customer Service / Contact Center"},
+      {c:"E2", s:"ok", t:"Completo"},
+      {c:"E3", s:"ok", t:"Completo"},
+      {c:"E4", s:"ok", t:"Customer Service Essentials mais acessível"},
+      {c:"E5", s:"ok", t:"Dataverse API + Power Automate"}
+    ],
+    precos:[
+      "Customer Service Professional: ~US$ 50/usuário · Enterprise US$ 105 · Premium US$ 195",
+      "Dynamics 365 Contact Center: US$ 110 · Contact Center Digital US$ 95 · implantação à parte"
+    ],
+    matriz:"Front door Alto · Financeiro Alto · Acesso Alto · Esporte Alto · Manutenção Alto · Governança Alto · Sociedade Alto"
+  },
+
+  {
+    rank:"+", tier:"comp", name:"n8n (middleware de orquestração)", url:"https://n8n.io/",
+    meta:"Open source · cloud Frankfurt / self-host",
+    fit:"Não é service desk — camada de orquestração",
+    cost:"€20+/mês", costSub:"Starter ~R$ 120 (2.500 execuções) · self-hosted R$ 80–150 (VPS)",
+    scores:null,
+    pros:[
+      "Desbloqueia roteamento por área+sede em planos baratos do service desk",
+      "1.700+ integrações nativas: CMMS, ERP, IA, e-mail e WhatsApp (via BSP)",
+      "Nós de IA/LLM nativos (OpenAI, Anthropic, Gemini)",
+      "Ilimitado em usuários e workflows; lógica explícita, versionável e auditável",
+      "Self-hosted é gratuito (apenas custo de VPS)"
+    ],
+    cons:[
+      "Dependência operacional: se o n8n cair, o roteamento para",
+      "Manutenção técnica — workflows precisam de perfil técnico (risco de sucessão)",
+      "WhatsApp não é nó nativo: integração via HTTP/webhook",
+      "Cloud em Frankfurt — exige cláusula LGPD; self-hosted exige servidor e backups"
+    ],
+    precos:[
+      "Starter: €20/mês (2.500 execuções) · Pro €50/mês (10.000)",
+      "Self-hosted: R$ 80–150/mês (VPS) — usuários e execuções ilimitados"
+    ]
+  },
+  {
+    rank:"+", tier:"comp", dim:true, name:"Chatbase", url:"https://www.chatbase.co/",
+    meta:"EUA · camada de IA — não é service desk",
+    fit:"Eliminada como principal (E2/E3/E4) — útil em v2",
+    cost:"US$ 120–400/mês", costSub:"Modelo por créditos de mensagem",
+    scores:{func:"25", rnf:"39", total:"32"},
+    pros:[
+      "Cria agentes de IA treinados no FAQ, regulamento e base de conhecimento do clube",
+      "Em v2, pode deflexionar 30–50% das mensagens no WhatsApp antes de abrir ticket",
+      "Integra com Zendesk, WhatsApp, Slack e Zapier via API/AI Actions"
+    ],
+    cons:[
+      "Sem filas unificadas, SLA por fila ou roteamento multissede",
+      "Standard (4.000 créditos) pode ser insuficiente para 800–1.200 tickets/mês",
+      "Pro (~R$ 2.400/mês) mais seguro, mas ainda sem SLA nativo",
+      "Avaliar apenas como camada de IA após 6 meses de operação real"
+    ],
+    elim:[
+      {c:"E1", s:"ok", t:"WhatsApp como canal do agente de IA"},
+      {c:"E2", s:"no", t:"Sem filas unificadas — ticket é criado em sistema externo"},
+      {c:"E3", s:"no", t:"SLA apenas no Enterprise (contrato, não por fila do clube)"},
+      {c:"E4", s:"no", t:"Modelo de créditos — sem distinção de perfil de agente"},
+      {c:"E5", s:"ok", t:"Cria OS no CMMS via AI Actions + API"}
+    ],
+    precos:[
+      "Hobby US$ 19–32 · Standard US$ 99–120 (4.000 créditos)",
+      "Pro US$ 400 (15.000 créditos) · Enterprise sob consulta"
+    ]
+  },
+  {
+    rank:"+", tier:"comp", dim:true, name:"Desk365", url:"https://www.desk365.io/",
+    meta:"EUA · foco em Microsoft Teams",
+    fit:"Eliminada pelo E1 — sem WhatsApp nativo",
+    cost:"~R$ 380/mês", costSub:"~US$ 12–20/agente/mês",
+    scores:{func:"43", rnf:"61", total:"52"},
+    pros:[
+      "Integração nativa com Microsoft Teams, Entra ID (SSO), Power BI e Power Automate",
+      "Custo muito acessível",
+      "Complemento natural se o clube consolidar a gestão interna no Microsoft 365"
+    ],
+    cons:[
+      "Eliminado pelo E1: sem WhatsApp Business API nativo — inviabiliza o canal primário",
+      "Serviria apenas para chamados internos (equipe ↔ equipe), não para associados"
+    ],
+    elim:[
+      {c:"E1", s:"no", t:"Não é foco do produto — sem WhatsApp Business API nativo"},
+      {c:"E2", s:"warn", t:"Microsoft Teams, e-mail e portal — sem WhatsApp"},
+      {c:"E3", s:"ok", t:"SLA monitoring nativo"},
+      {c:"E4", s:"ok", t:"Preço acessível (~US$ 12–20/agente)"},
+      {c:"E5", s:"ok", t:"Power Automate connectors"}
+    ],
+    precos:["~US$ 12–20/agente/mês"]
+  }
+];
+
+const ELIM_ICON = {ok:"✓", warn:"!", no:"✕"};
+
+function platScores(p){
+  if(!p.scores) return "";
+  const cell = (v,l,cls) => `<div class="score ${cls||""}"><div class="sv">${escapeHtml(v)}%</div><div class="sl">${l}</div></div>`;
+  return `<div class="platc-scores">${cell(p.scores.func,"Funcional")}${cell(p.scores.rnf,"RNF")}${cell(p.scores.total,"Aderência","total")}</div>`;
+}
+
+function platExtra(p){
+  let blocks = "";
+  if(p.elim){
+    blocks += `<div class="extra-block"><h5>Critérios eliminatórios</h5><div class="elim-grid">${p.elim.map(e =>
+      `<div class="elim-row"><span class="es ${e.s}">${e.c} ${ELIM_ICON[e.s]}</span><span>${escapeHtml(e.t)}</span></div>`).join("")}</div></div>`;
+  }
+  if(p.precos){
+    blocks += `<div class="extra-block"><h5>Preços publicados</h5><ul>${p.precos.map(x => `<li>${escapeHtml(x)}</li>`).join("")}</ul></div>`;
+  }
+  if(p.matriz){
+    blocks += `<div class="extra-block"><h5>Aderência por bloco de casos de uso</h5><p>${escapeHtml(p.matriz)}</p></div>`;
+  }
+  if(!blocks) return "";
+  return `<button class="platc-toggle" type="button" aria-expanded="false">Ver critérios e preços detalhados ▾</button>` +
+    `<div class="platc-extra"><div class="platc-extra-inner">${blocks}</div></div>`;
+}
+
+function platCard(p){
+  const rankCls = p.tier==="comp" ? "x" : (p.tier==="long" ? "alt" : "");
+  const name = p.url ? `<a href="${p.url}" target="_blank" rel="noopener">${escapeHtml(p.name)}</a>` : escapeHtml(p.name);
+  const cost = p.cost ? `<div class="platc-cost">${escapeHtml(p.cost)}${p.costSub ? `<small>${escapeHtml(p.costSub)}</small>` : ""}</div>` : "";
+  return `<article class="platc${p.dim ? " elim" : ""}">
+    <div class="platc-top">
+      <span class="platc-rank ${rankCls}">${escapeHtml(p.rank)}</span>
+      <div class="platc-id">
+        <div class="platc-name">${name}</div>
+        <div class="platc-meta">${escapeHtml(p.meta)}</div>
+        <span class="platc-fit">${escapeHtml(p.fit)}</span>
+      </div>
+    </div>
+    ${cost}
+    ${platScores(p)}
+    <div class="platc-pc">
+      <div class="pc-col pros"><h5>Pontos fortes</h5><ul>${p.pros.map(x => `<li><span class="mk">+</span><span>${escapeHtml(x)}</span></li>`).join("")}</ul></div>
+      <div class="pc-col cons"><h5>Pontos de atenção</h5><ul>${p.cons.map(x => `<li><span class="mk">!</span><span>${escapeHtml(x)}</span></li>`).join("")}</ul></div>
+    </div>
+    ${platExtra(p)}
+  </article>`;
+}
+
+function renderPlatforms(){
+  const map = {short:"plat-short", long:"plat-long", comp:"plat-comp"};
+  Object.values(map).forEach(id => { const el = document.getElementById(id); if(el) el.innerHTML = ""; });
+  PLATFORMS.forEach(p => {
+    const el = document.getElementById(map[p.tier]);
+    if(el) el.insertAdjacentHTML("beforeend", platCard(p));
+  });
+  document.querySelectorAll(".platc-toggle").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const extra = btn.nextElementSibling;
+      const open = extra.style.maxHeight && extra.style.maxHeight !== "0px";
+      extra.style.maxHeight = open ? "0" : extra.scrollHeight + "px";
+      btn.setAttribute("aria-expanded", open ? "false" : "true");
+      btn.textContent = open ? "Ver critérios e preços detalhados ▾" : "Ocultar detalhes ▴";
+    });
+  });
+}
+renderPlatforms();
 
 /* ===== Scroll reveal ===== */
 const ro = new IntersectionObserver((entries) => {
